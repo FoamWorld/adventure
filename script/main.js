@@ -1,4 +1,16 @@
 const PROJECT_NAME = "adventure";
+var dataset
+fetch("../assets/data/awards.json")
+    .then(response => {
+        if (!response.ok) {
+            console.error("HTTP error " + response.status)
+        }
+        return response.json()
+    })
+    .then(data => {
+        dataset["awards"] = data
+    });
+
 (function (storyContent) {
     var story = new inkjs.Story(storyContent)
     var savePoint = ""

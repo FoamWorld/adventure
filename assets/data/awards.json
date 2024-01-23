@@ -1,0 +1,9 @@
+{
+	"examine_permission": {
+		"text": "检查许可"
+	},
+	"regex_master": {
+		"text": "正则表达式大师",
+		"secret": true
+	}
+}
