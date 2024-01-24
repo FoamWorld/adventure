@@ -104,6 +104,10 @@ h2 {
     transition: background-color 0.6s;
 }
 
+#story.container {
+    overflow-y: visible;
+}
+
 p {
     font-size: 13pt;
     color: #888;
