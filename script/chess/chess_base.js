@@ -42,7 +42,7 @@ class Board {
 	count() {
 		let cnt = 0
 		for (let x of this.contents)
-			if (this.config.cells[x].type != "v")
+			if (this.config.cells[x.id].type != "v")
 				cnt += 1
 		return cnt
 	}

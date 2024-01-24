@@ -1,3 +1,20 @@
+function cat_svg(color, color2, direction) {
+	let svg = new Image()
+	let ml = window.btoa(`<svg xmlns="http://www.w3.org/2000/svg">
+	<path fill="${color}" d="M 418.606,150 A 200 200 0 0 ${direction} 61.394,330 M 61.394,330 L 110,270 L 180,270 L 240,330 L 240,150 L 300,210 L 370,210 L 418.606,150 Z"/>
+	${direction == 1 ?
+			`<circle cx="300" cy="260" r="10" fill="${color2}"/><circle cx="370" cy="260" r="10" fill="${color2}"/>` :
+			`<circle cx="180" cy="220" r="10" fill="${color2}"/><circle cx="110" cy="220" r="10" fill="${color2}"/>`
+		}
+	</svg>`)
+	svg.src = "data:image/svg+xml;base64," + ml
+	return svg
+}
+
+const cat_svg_cache = [
+	[null, cat_svg("white", "black", 0), cat_svg("black", "orange", 0), cat_svg("orange", "white", 0)],
+	[null, cat_svg("white", "black", 1), cat_svg("black", "orange", 1), cat_svg("orange", "white", 1)]
+]
 var catchessRules = {
 	moveWhiteCat: function (b, pos) {
 		let list = []
@@ -63,22 +80,7 @@ var catchessRules = {
 		}
 		return list
 	},
-	catsvg: function (color, color2, direction) {
-		let svg = new Image()
-		let ml = window.btoa(`<svg xmlns="http://www.w3.org/2000/svg">
-	<path fill="${color}" d="M 418.606,150 A 200 200 0 0 ${direction} 61.394,330 M 61.394,330 L 110,270 L 180,270 L 240,330 L 240,150 L 300,210 L 370,210 L 418.606,150 Z"/>
-	${direction == 1 ?
-				`<circle cx="300" cy="260" r="10" fill="${color2}"/><circle cx="370" cy="260" r="10" fill="${color2}"/>` :
-				`<circle cx="180" cy="220" r="10" fill="${color2}"/><circle cx="110" cy="220" r="10" fill="${color2}"/>`
-			}
-	</svg>`)
-		svg.src = "data:image/svg+xml;base64," + ml
-		return svg
-	},
-	ocs: [
-		[null, this.catsvg("white", "black", 0), this.catsvg("black", "orange", 0), this.catsvg("orange", "white", 0)],
-		[null, this.catsvg("white", "black", 1), this.catsvg("black", "orange", 1), this.catsvg("orange", "white", 1)]
-	],
+
 	__init__: function () {
 		let board = new Board()
 		board.length = 8
@@ -125,7 +127,7 @@ var catchessRules = {
 					for (let j = 0; j < 8; j++) {
 						let obj = board.contents[i * 8 + j]
 						if (obj.id == 0) continue
-						ctx.drawImage(this.ocs[obj.ownership][obj.id], i * xw, j * yw, xw, yw)
+						ctx.drawImage(cat_svg_cache[obj.ownership][obj.id], i * xw, j * yw, xw, yw)
 					}
 				}
 			},
