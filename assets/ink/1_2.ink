@@ -76,10 +76,10 @@ Dgeros：“欢迎来到……呃……你先把这个戴上。”
 * (asked) “那如果重名会发生什么？”
 	“你猜猜看。”
 * “……”
-#SCRIPT: init catchess_test
+-
+#SCRIPT: catchess_test: init
 #INPUT: t_target_name
-#SCRIPT: check catchess_test
-// RANDOM EVENT: 恶灵已附身你 ⇒ 出师未捷身先死
+#SCRIPT: catchess_test: check
 {t_target_name == ".*":
 	#AWARD: give regex_master
 	“你为什么会觉得它支持正则表达式呢？”
@@ -93,7 +93,6 @@ Dgeros：“欢迎来到……呃……你先把这个戴上。”
 	-> u_end_demonify
 }
 {t_target_name == t_password:
-	#SCRIPT: check2 catchess_test
 	{t_check:
 		-> test2
 	}
@@ -104,6 +103,7 @@ Dgeros：“欢迎来到……呃……你先把这个戴上。”
 -> fail
 
 = test2
+“第二项测试是：调查”
 -> done
 
 = caught_pataphysics

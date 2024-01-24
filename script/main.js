@@ -1,5 +1,5 @@
 const PROJECT_NAME = "adventure";
-var dataset;
+var dataset= {};
 fetch("../assets/data/awards.json")
     .then(response => {
         if (!response.ok) {
@@ -155,11 +155,11 @@ var extraScripts = {};
                     let input = document.createElement("input")
                     input.type = "text"
                     input.className = "input"
-                    input.value = get_var(splitTag.val).value
+                    input.value = ink_var(splitTag.val).value
                     input.placeholder = "input"
                     prependChoices.push(input)
                     choiceAfter.push(function () {
-                        get_var(splitTag.val).value = input.value
+                        ink_var(splitTag.val).value = input.value
                     })
                 }
                 // IMAGE: src
@@ -201,11 +201,11 @@ var extraScripts = {};
                     if (mode == "normal" || mode == "shiny") {
                         if (type == "uniform_int_distribution") {
                             value = Math.floor(Math.random() * (args[1] - args[0] + 1)) + args[0]
-                            get_var("t_random").value = value
+                            ink_var("t_random").value = value
                         }
                     }
                     else if (mode == "editable") {
-                        get_var("t_random").value = Number(window.prompt(splitTag.val, args[0]))
+                        ink_var("t_random").value = Number(window.prompt(splitTag.val, args[0]))
                     }
                     if (mode == "shiny") {
                         let text = value === undefined ? "%RANDOM%" : `%RANDOM: ${value}%`
@@ -221,8 +221,8 @@ var extraScripts = {};
                 }
                 // SCRIPT: oper name
                 else if (splitTag && splitTag.property == "SCRIPT") {
-                    let vec = splitTag.val.split(' ', 2)
-                    extraScripts[vec[1]].call(vec[0])
+                    let vec = splitTag.val.split(':', 2)
+                    extraScripts[vec[0]].call(vec[1])
                 }
                 // SET: varname
                 else if (splitTag && splitTag.property == "SET") {
@@ -381,7 +381,7 @@ var extraScripts = {};
         container.push(ul)
     }
 
-    function get_var(name) {
+    function ink_var(name) {
         return story.state._variablesState._globalVariables.get(name)
     }
 
@@ -506,7 +506,7 @@ var extraScripts = {};
         let saveEl = document.getElementById("save")
         if (saveEl) saveEl.addEventListener("click", function (event) {
             try {
-                localStorage.setItem(`${PROJECT_NAME}-version`, get_var("VERSION"))
+                localStorage.setItem(`${PROJECT_NAME}-version`, ink_var("VERSION"))
                 localStorage.setItem(`${PROJECT_NAME}-state`, savePoint)
                 document.getElementById("reload").removeAttribute("disabled")
                 localStorage.setItem('ink-theme', document.body.classList.contains("dark") ? "dark" : "")
@@ -526,7 +526,7 @@ var extraScripts = {};
             storyContainer.replaceChildren()
             try {
                 let savedVersion = localStorage.getItem(`${PROJECT_NAME}-version`)
-                let currentVersion = get_var("VERSION")
+                let currentVersion = ink_var("VERSION")
                 if (savedVersion != currentVersion) {
                     let conf = window.confirm(`存档版本 ${savedVersion} 与当前版本 ${currentVersion} 不匹配，是否尝试加载？`)
                     if (!conf) throw ("加载被拒绝")

@@ -1,4 +1,4 @@
-CONST VERSION = "v0.1.0-alpha"
+CONST VERSION = "v0.1.0-beta"
 
 INCLUDE 1_1.ink
 INCLUDE 1_2.ink

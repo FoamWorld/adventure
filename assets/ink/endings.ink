@@ -42,6 +42,10 @@
 至少不是现在。#CLASS: help
 -> ending
 
+== u_end_die_early ==
+出师未捷身先死 #END: unusual
+-> ending
+
 == u_end_dream ==
 // 触发：清除记忆
 浮生一梦 #END: unusual
