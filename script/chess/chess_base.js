@@ -39,6 +39,13 @@ class Board {
 		let x = this.getIndex(pos)
 		return this.config.cells[x.id].type == "p" && this.config.rival(x.ownership, me)
 	}
+	count() {
+		let cnt = 0
+		for (let x of this.contents)
+			if (this.config.cells[x].type != "v")
+				cnt += 1
+		return cnt
+	}
 }
 
 function initialize_chess(board, canvas) {

@@ -11,10 +11,21 @@ fetch("../assets/data/awards.json")
         dataset["awards"] = data
     });
 
-var extraScripts = {};
+var varBoard = {};
+var extraScripts = {
+    "include": function(path) {
+        let script = document.createElement("script")
+        script.src = path
+        document.body.append(script)
+    }
+};
 
+var story;
+function ink_var(name) {
+    return story.state._variablesState._globalVariables.get(name)
+}
 (function (storyContent) {
-    var story = new inkjs.Story(storyContent)
+    story = new inkjs.Story(storyContent)
     var savePoint = ""
     let globalTagTheme
 
@@ -222,7 +233,7 @@ var extraScripts = {};
                 // SCRIPT: oper name
                 else if (splitTag && splitTag.property == "SCRIPT") {
                     let vec = splitTag.val.split(':', 2)
-                    extraScripts[vec[0]].call(vec[1])
+                    extraScripts[vec[0].trim()](vec[1].trim())
                 }
                 // SET: varname
                 else if (splitTag && splitTag.property == "SET") {
@@ -379,10 +390,6 @@ var extraScripts = {};
             ul.append(li)
         }
         container.push(ul)
-    }
-
-    function ink_var(name) {
-        return story.state._variablesState._globalVariables.get(name)
     }
 
     // Fades in an element after a specified delay

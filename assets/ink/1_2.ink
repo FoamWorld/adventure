@@ -48,7 +48,7 @@ Dgeros：“欢迎来到……呃……你先把这个戴上。”
 		<img src="https:\/\/scp-wiki.wdfiles.com/local--files/theme%3Abasalt/basalt_scp_logo-for_lightmode.svg"/>
 	* “你们是做什么的？”
 		“我们以<span class="ruby">收容<span class="rt">Secure</span></span>、<span class="ruby">控制<span class="rt">Contain</span></span>、<span class="ruby">保护<span class="rt">Protect</span></span>为宗旨，其对象是被我们称之为收容物/SCP 的……东西。”
-	* “你们对于世界持有怎样的态度？”
+	* {asked} “你们对于世界持有怎样的态度？”
 		“我们所做的被称作‘必要之恶’。”
 	* {asked} “我们有哪些同行组织？”
 		“其实还挺多……我们最大的同行组织是<span class="ruby">全球超自然联盟（GOC）<span class="rt">Global Occult Coalition</span></span>。”
@@ -77,9 +77,13 @@ Dgeros：“欢迎来到……呃……你先把这个戴上。”
 	“你猜猜看。”
 * “……”
 -
+#SCRIPT: include: /script/chess/chess_base.js
+#SCRIPT: include: /script/chess/catchess.js
+#SCRIPT: include: /script/extra/catchess_test.js
 #SCRIPT: catchess_test: init
 #INPUT: t_target_name
 #SCRIPT: catchess_test: check
++ [确定]
 {t_target_name == ".*":
 	#AWARD: give regex_master
 	“你为什么会觉得它支持正则表达式呢？”
@@ -119,6 +123,10 @@ Dgeros：“欢迎来到……呃……你先把这个戴上。”
 
 = fail
 -> u_end_fail
+
+= fail2
+不幸的是，恶灵在你操作棋子时附身了你。
+-> u_end_die_early
 
 = done
 -> END
