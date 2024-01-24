@@ -1,5 +1,5 @@
 const PROJECT_NAME = "adventure";
-var dataset
+var dataset;
 fetch("../assets/data/awards.json")
     .then(response => {
         if (!response.ok) {
@@ -10,6 +10,8 @@ fetch("../assets/data/awards.json")
     .then(data => {
         dataset["awards"] = data
     });
+
+var extraScripts = {};
 
 (function (storyContent) {
     var story = new inkjs.Story(storyContent)
@@ -219,7 +221,8 @@ fetch("../assets/data/awards.json")
                 }
                 // SCRIPT: oper name
                 else if (splitTag && splitTag.property == "SCRIPT") {
-                    window.alert("功能尚待更新")
+                    let vec = splitTag.val.split(' ', 2)
+                    extraScripts[vec[1]].call(vec[0])
                 }
                 // SET: varname
                 else if (splitTag && splitTag.property == "SET") {
