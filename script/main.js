@@ -1,5 +1,5 @@
 const PROJECT_NAME = "adventure";
-var dataset= {};
+var dataset = {};
 fetch("../assets/data/awards.json")
     .then(response => {
         if (!response.ok) {
@@ -13,7 +13,7 @@ fetch("../assets/data/awards.json")
 
 var varBoard = {};
 var extraScripts = {
-    "include": function(path) {
+    "include": function (path) {
         let script = document.createElement("script")
         script.src = path
         document.body.append(script)
@@ -24,45 +24,53 @@ var story;
 function ink_var(name) {
     return story.state._variablesState._globalVariables.get(name)
 }
+
+// 统计数据
+var statistics = {
+    award: {},
+    end: {
+        common: new Set(), unusual: new Set(),
+        rare: new Set(), epic: new Set(),
+        legendary: new Set(), mythic: new Set(),
+        bad: new Set(), good: new Set(), true: new Set(),
+    }
+}
+
+// 可设置数据
+var contactVar = {
+    displayImage: true,
+    optionSpeed: 200.0,
+    randomMode: "normal",
+    textSpeed: 200.0,
+}
+
+/* 保存点
+ + contactVar
+ + ink_var("VERSION").value
+ + story.state
+ - statistics
+ - theme
+ */
+function packSavePoint() {
+    return {
+        contactVar: JSON.stringify(contactVar),
+        savedState: story.state.toJson(),
+        savedVersion: ink_var("VERSION").value,
+    }
+}
+
 (function (storyContent) {
     story = new inkjs.Story(storyContent)
     var savePoint = ""
     let globalTagTheme
 
     // var globalTags = story.globalTags
-
     var storyContainer = document.querySelector('#story')
     var outerScrollContainer = document.querySelector('.outerContainer')
 
     setupTheme(globalTagTheme)
     var hasSave = loadSavePoint()
     setupButtons(hasSave)
-
-    // 统计数据
-    var statistics = {
-        award: {
-        },
-        end: {
-            common: new Set(),
-            unusual: new Set(),
-            rare: new Set(),
-            epic: new Set(),
-            legendary: new Set(),
-            mythic: new Set(),
-            bad: new Set(),
-            good: new Set(),
-            true: new Set(),
-        }
-    }
-
-    // 可设置数据
-    var contactVar = {
-        displayImage: true,
-        optionSpeed: 200.0,
-        randomMode: "normal",
-        textSpeed: 200.0,
-    }
-
     savePoint = story.state.toJson()
     continueStory(true)
 
@@ -467,7 +475,7 @@ function ink_var(name) {
 
     function loadSavePoint() {
         try {
-            let savedState = getItem('save-state')
+            let savedState = getItem(`${PROJECT_NAME}-save-state`)
             if (savedState) {
                 story.state.LoadJson(savedState)
                 return true
@@ -508,8 +516,8 @@ function ink_var(name) {
         let saveEl = document.getElementById("save")
         if (saveEl) saveEl.addEventListener("click", function (event) {
             try {
-                localStorage.setItem(`${PROJECT_NAME}-version`, ink_var("VERSION"))
-                localStorage.setItem(`${PROJECT_NAME}-state`, savePoint)
+                localStorage.setItem(`${PROJECT_NAME}-version`, ink_var("VERSION")).value
+                localStorage.setItem(`${PROJECT_NAME}-save-state`, savePoint)
                 document.getElementById("reload").removeAttribute("disabled")
                 localStorage.setItem('ink-theme', document.body.classList.contains("dark") ? "dark" : "")
             } catch (e) {
@@ -528,12 +536,12 @@ function ink_var(name) {
             storyContainer.replaceChildren()
             try {
                 let savedVersion = localStorage.getItem(`${PROJECT_NAME}-version`)
-                let currentVersion = ink_var("VERSION")
+                let currentVersion = ink_var("VERSION").value
                 if (savedVersion != currentVersion) {
                     let conf = window.confirm(`存档版本 ${savedVersion} 与当前版本 ${currentVersion} 不匹配，是否尝试加载？`)
                     if (!conf) throw ("加载被拒绝")
                 }
-                let savedState = localStorage.getItem(`${PROJECT_NAME}-state`)
+                let savedState = localStorage.getItem(`${PROJECT_NAME}-save-state`)
                 if (savedState) story.state.LoadJson(savedState)
             }
             catch (e) {
