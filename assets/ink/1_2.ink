@@ -73,9 +73,9 @@ Dgeros：“欢迎来到……呃……你先把这个戴上。”
 <hr>
 “我们现在开始第一项测试。这把枪可以塞入普通子弹，在使用时思考你见过的生物的名字，就可以杀死它。”
 “请用此枪杀死附身在棋子上的恶灵。”
-#SCRIPT: include: /script/chess/chess_base.js
-#SCRIPT: include: /script/chess/catchess.js
-#SCRIPT: include: /script/extra/catchess_test.js
+#SCRIPT: include: script/chess/chess_base.js
+#SCRIPT: include: script/chess/catchess.js
+#SCRIPT: include: script/extra/catchess_test.js
 * (asked) “那如果重名会发生什么？”
 	“你猜猜看。”
 * “……”

@@ -1,9 +1,10 @@
 const PROJECT_NAME = "adventure";
 var dataset = {};
-fetch("../assets/data/awards.json")
+fetch("assets/data/awards.json")
     .then(response => {
         if (!response.ok) {
             console.error("HTTP error " + response.status)
+            return null
         }
         return response.json()
     })
