@@ -84,6 +84,7 @@ Dgeros：“欢迎来到……呃……你先把这个戴上。”
 #INPUT: t_target_name
 + [确定]
 #SCRIPT: catchess_test: check
+.
 {t_target_name == ".*":
 	#AWARD: give regex_master
 	“你为什么会觉得它支持正则表达式呢？”
@@ -113,8 +114,10 @@ Dgeros：“欢迎来到……呃……你先把这个戴上。”
 = caught_pataphysics
 <hr>
 “欢迎来到超形上学部。”
-“或许你会好奇为什么你没有杀死那位存在，可能是因为无限嵌入叙事层、<span class="ruby">回旋跨层<span class="rt">cyclical-transgression</span></span>或者<span class="ruby">亚叙事层<span class="rt">sub-diegesis</span></span>理论，甚至，是因为「设定」中那个枪不可能做得很强大。”
+“或许你会好奇为什么你没有杀死那位存在，可能是因为无限嵌入叙事层、<span class="ruby">回旋跨层<span class="rt">cyclical-transgression</span></span>或者<span class="ruby">亚叙事层<span class="rt">sub-diegesis</span></span>理论，或者，只是因为「设定」中那个枪是虚假描述的而已。”
 + “你这‘超形上学’明明是实在论，是前反思的！……”
+	“……”
++ “但是我的本体和那位存在在同一层。”
 	“……”
 + “……”
 	“不过这都不重要，总之……”

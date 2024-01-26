@@ -13,11 +13,14 @@ fetch("assets/data/awards.json")
     });
 
 var varBoard = {};
+var extraScriptsLoaded = new Set()
 var extraScripts = {
     "include": function (path) {
+        if (extraScriptsLoaded.has(path)) return
         let script = document.createElement("script")
         script.src = path
         document.body.append(script)
+        extraScriptsLoaded.add(path)
     }
 };
 
