@@ -55,12 +55,17 @@ var contactVar = {
  - statistics
  - theme
  */
+var checkPoint;
 function packSavePoint() {
     return {
         contactVar: JSON.stringify(contactVar),
         savedState: story.state.toJson(),
         savedVersion: ink_var("VERSION").value,
     }
+}
+function unpackSavePoint(json) {
+    contactVar = JSON.parse(json.contactVar)
+    story.state.LoadJson(json.savedState)
 }
 
 (function (storyContent) {
@@ -146,6 +151,10 @@ function packSavePoint() {
                 // BACKGROUND: src
                 else if (splitTag && splitTag.property == "BACKGROUND") {
                     outerScrollContainer.style.backgroundImage = 'url(' + splitTag.val + ')';
+                }
+                // CHECKPOINT
+                else if (tag == "CHECKPOINT") {
+                    checkPoint = packSavePoint()
                 }
                 // CLASS: className
                 else if (splitTag && splitTag.property == "CLASS") {
@@ -553,6 +562,24 @@ function packSavePoint() {
             }
             continueStory(true);
         });
+
+        let backwardsEl = document.getElementById("backwards");
+        if (checkPoint == undefined) {
+            backwardsEl.setAttribute("disabled", "disabled")
+        }
+        backwardsEl.addEventListener("click", function (event) {
+            if (!(checkPoint instanceof Object))
+                return
+
+            storyContainer.replaceChildren()
+            try {
+                unpackSavePoint(checkPoint)
+            }
+            catch (e) {
+                console.debug("无法打开保存的状态")
+            }
+            continueStory(true);
+        })
 
         let themeSwitchEl = document.getElementById("theme-switch")
         if (themeSwitchEl) themeSwitchEl.addEventListener("click", function (event) {
