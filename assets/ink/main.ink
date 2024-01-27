@@ -69,11 +69,14 @@ VAR t_target_name = ""
 		#SET: optionSpeed 200.0
 	+ + [瞬间]
 		#SET: optionSpeed "instant"
++ [调节重要游戏节点显示]
+	+ + [显示]
+		#SET: processShiny false
+	+ + [显示]
+		#SET: processShiny true
 + [设置随机模式]
 	+ + [正常随机]
 		#SET: randomMode "normal"
-	+ + [显示随机发生位置]
-		#SET: randomMode "shiny"
 	+ + [自主设置随机结果]
 		#SET: randomMode "editable"
 + [调节图片显示]

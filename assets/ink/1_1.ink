@@ -7,7 +7,7 @@
 -> introduction
 
 = introduction
-#CHECKPOINT
+#CHECKPOINT: set
 那是一个夏日的傍晚。太阳已行将就木，可以感受到太阴的躁动。
 你独自一人走在公园的小路上。
 你看了看表，是时候回去了。
@@ -30,7 +30,7 @@
 	你似乎只能原地等死 -> END
 
 = investigate
-#CHECKPOINT
+#CHECKPOINT: set
 你不知道那个信息从哪里来，为什么知道那个图形是什么，甚至那几个字还仿佛在闪闪发亮。
 不过面前的三位灰袍人肯定不知道这一点。他们还在空洞地看着祭台上的书，嘴里无意识地发出呢喃。
 - (opts)
@@ -154,6 +154,7 @@
     -> meet
 
 = meet
+#CHECKPOINT: set
 <hr>
 几分钟后，三个穿着制服的人出现在你眼前。
 “很抱歉你被卷入……”

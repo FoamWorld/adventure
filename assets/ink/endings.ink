@@ -5,6 +5,9 @@
 + [重新开始]
 	#RESTART
 	-> DONE
++ [回退到重要节点]
+	#CHECKPOINT: jump
+	-> DONE
 + [结束] ->
 	结束会抹除所有统计数据，确定继续吗？ #CLASS: warning
 	+ + [确定] -> END

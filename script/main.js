@@ -44,6 +44,8 @@ var statistics = {
 var contactVar = {
     displayImage: true,
     optionSpeed: 200.0,
+    player: {},
+    processShiny: false,
     randomMode: "normal",
     textSpeed: 200.0,
 }
@@ -65,7 +67,19 @@ function packSavePoint() {
 }
 function unpackSavePoint(json) {
     contactVar = JSON.parse(json.contactVar)
+    story.ResetState()
     story.state.LoadJson(json.savedState)
+}
+function backCheckPoint() {
+    if (!(checkPoint instanceof Object)) return
+    storyContainer.replaceChildren()
+    try {
+        unpackSavePoint(checkPoint)
+    }
+    catch (e) {
+        console.debug("无法打开保存的状态")
+    }
+    continueStory(true)
 }
 
 (function (storyContent) {
@@ -153,8 +167,18 @@ function unpackSavePoint(json) {
                     outerScrollContainer.style.backgroundImage = 'url(' + splitTag.val + ')';
                 }
                 // CHECKPOINT
-                else if (tag == "CHECKPOINT") {
-                    checkPoint = packSavePoint()
+                else if (splitTag && splitTag.property == "CHECKPOINT") {
+                    if (splitTag.val == "set") {
+                        checkPoint = packSavePoint()
+                        if (contactVar["processShiny"]) {
+                            let noti = createQElement("p", { className: "neon", innerText: "#CHECKPOINT#" })
+                            noti.style.textAlign = "center"
+                            appendList.push(noti)
+                        }
+                    }
+                    else if (splitTag.val == "jump") {
+                        backCheckPoint()
+                    }
                 }
                 // CLASS: className
                 else if (splitTag && splitTag.property == "CLASS") {
@@ -230,7 +254,7 @@ function unpackSavePoint(json) {
                     let value = undefined
                     let args = splitTag.val.split(' ')
                     let type = args.shift(1)
-                    if (mode == "normal" || mode == "shiny") {
+                    if (mode == "normal") {
                         if (type == "uniform_int_distribution") {
                             value = Math.floor(Math.random() * (args[1] - args[0] + 1)) + args[0]
                             ink_var("t_random").value = value
@@ -239,7 +263,7 @@ function unpackSavePoint(json) {
                     else if (mode == "editable") {
                         ink_var("t_random").value = Number(window.prompt(splitTag.val, args[0]))
                     }
-                    if (mode == "shiny") {
+                    if (contactVar["processShiny"]) {
                         let text = value === undefined ? "%RANDOM%" : `%RANDOM: ${value}%`
                         let noti = createQElement("p", { className: "neon", innerText: text })
                         noti.style.textAlign = "center"
@@ -562,17 +586,7 @@ function unpackSavePoint(json) {
             backwardsEl.setAttribute("disabled", "disabled")
         }
         backwardsEl.addEventListener("click", function (event) {
-            if (!(checkPoint instanceof Object))
-                return
-
-            storyContainer.replaceChildren()
-            try {
-                unpackSavePoint(checkPoint)
-            }
-            catch (e) {
-                console.debug("无法打开保存的状态")
-            }
-            continueStory(true);
+            backCheckPoint()
         })
 
         let themeSwitchEl = document.getElementById("theme-switch")
