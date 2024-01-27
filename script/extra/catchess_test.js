@@ -19,7 +19,8 @@ extraScripts["catchess_test"] = function (command) {
 			if (Math.random() * Math.log(varBoard["cnt"]) > 2) {
 				varBoard["cnt"] = -1
 				let p = document.createElement("p")
-				p.innerText = `你发现了一行烟雾状的字：${uuid}`
+				p.innerText = `你发现了一行烟雾状的字：`
+				p.append(copyable(uuid))
 				document.getElementById("story").append(p)
 			}
 		})

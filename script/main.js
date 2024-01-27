@@ -365,12 +365,6 @@ function unpackSavePoint(json) {
         }
     }
 
-    function createQElement(tagname, deco = {}) {
-        let tag = document.createElement(tagname)
-        for (let k of Object.keys(deco)) tag[k] = deco[k]
-        return tag
-    }
-
     function describe_set(set) {
         let l = set.size
         if (l == 0)

@@ -272,6 +272,11 @@ h4 {
     font-family: "Quattrocento", Georgia, 'Times New Roman', Times, serif;
 }
 
+.copyable {
+    color: goldenrod;
+    cursor: copy;
+}
+
 .distort {
     font-style: italic;
     text-shadow: 0 2px;
