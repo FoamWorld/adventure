@@ -32,12 +32,7 @@ function ink_var(name) {
 // 统计数据
 var statistics = {
     award: {},
-    end: {
-        common: new Set(), unusual: new Set(),
-        rare: new Set(), epic: new Set(),
-        legendary: new Set(), mythic: new Set(),
-        bad: new Set(), good: new Set(), true: new Set(),
-    }
+    end: {},
 }
 
 // 可设置数据
@@ -57,7 +52,6 @@ var contactVar = {
  - statistics
  - theme
  */
-var checkPoint;
 function packSavePoint() {
     return {
         contactVar: JSON.stringify(contactVar),
@@ -70,6 +64,12 @@ function unpackSavePoint(json) {
     story.ResetState()
     story.state.LoadJson(json.savedState)
 }
+function saveExtra() {
+    localStorage.setItem('ink-theme', document.body.classList.contains("dark") ? "dark" : "")
+    localStorage.setItem(`${PROJECT_NAME}-statistics`, JSON.stringify(statistics))
+}
+
+var checkPoint;
 function backCheckPoint() {
     if (!(checkPoint instanceof Object)) return
     storyContainer.replaceChildren()
@@ -171,9 +171,7 @@ function backCheckPoint() {
                     if (splitTag.val == "set") {
                         checkPoint = packSavePoint()
                         if (contactVar["processShiny"]) {
-                            let noti = createQElement("p", { className: "neon", innerText: "#CHECKPOINT#" })
-                            noti.style.textAlign = "center"
-                            appendList.push(noti)
+                            appendList.push(noticeable("#CHECKPOINT#"))
                         }
                     }
                     else if (splitTag.val == "jump") {
@@ -203,8 +201,15 @@ function backCheckPoint() {
                 // END: type
                 else if (splitTag && splitTag.property == "END") {
                     storyContainer.appendChild(document.createElement("hr"))
-                    customClasses.push(splitTag.val + "-end")
-                    statistics.end[splitTag.val].add(paragraphText.trim())
+                    let type = splitTag.val
+                    let name = paragraphText.trim()
+                    customClasses.push(type + "-end")
+                    if (statistics.end[type] == undefined)
+                        statistics.end[type] = {}
+                    if (statistics.end[type][name] == undefined)
+                        statistics.end[type][name] = 1
+                    else
+                        statistics.end[type][name] += 1
                 }
                 // INPUT: varname
                 else if (splitTag && splitTag.property == "INPUT") {
@@ -264,10 +269,7 @@ function backCheckPoint() {
                         ink_var("t_random").value = Number(window.prompt(splitTag.val, args[0]))
                     }
                     if (contactVar["processShiny"]) {
-                        let text = value === undefined ? "%RANDOM%" : `%RANDOM: ${value}%`
-                        let noti = createQElement("p", { className: "neon", innerText: text })
-                        noti.style.textAlign = "center"
-                        appendList.push(noti)
+                        appendList.push(noticeable(`%RANDOM: ${value}%`))
                     }
                 }
                 // RESTART
@@ -389,20 +391,6 @@ function backCheckPoint() {
         }
     }
 
-    function describe_set(set) {
-        let l = set.size
-        if (l == 0)
-            return "无"
-        let v = "", count = 0
-        for (let i of set.values()) {
-            count += 1
-            v = v + i
-            if (count != l)
-                v += "，"
-        }
-        return v
-    }
-
     function display_awards(container) {
         let awards = statistics["award"]
         let ul = document.createElement("ul")
@@ -420,7 +408,7 @@ function backCheckPoint() {
         for (let key in endings) {
             let keyname = { "common": "普通", "unusual": "正常", "rare": "稀有", "epic": "史诗", "legendary": "传奇", "mythic": "神话", "bad": "坏", "good": "好", "true": "真" }[key] + "结局："
             let li = document.createElement("li")
-            li.innerText = keyname + describe_set(endings[key])
+            li.innerText = keyname + JSON.stringify(endings[key])
             ul.append(li)
         }
         container.push(ul)
@@ -550,7 +538,7 @@ function backCheckPoint() {
                 localStorage.setItem(`${PROJECT_NAME}-version`, ink_var("VERSION")).value
                 localStorage.setItem(`${PROJECT_NAME}-save-state`, savePoint)
                 document.getElementById("reload").removeAttribute("disabled")
-                localStorage.setItem('ink-theme', document.body.classList.contains("dark") ? "dark" : "")
+                saveExtra()
             } catch (e) {
                 console.warn("无法保存状态")
             }

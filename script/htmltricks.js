@@ -5,11 +5,17 @@ function createQElement(tagname, deco = {}) {
 }
 
 function copyable(text) {
-	let span = createQElement("span", { innerText: text, className: "copyyable" })
+	let span = createQElement("span", { innerText: text, className: "copyable" })
 	span.addEventListener("click", function (_) {
 		navigator.clipboard.writeText(text).then(() => undefined, function () {
 			window.alert("复制失败")
 		})
 	})
 	return span
+}
+
+function noticeable(text) {
+	let noti = createQElement("p", { className: "neon", innerText: text })
+	noti.style.textAlign = "center"
+	return noti
 }
