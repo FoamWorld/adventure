@@ -1,4 +1,4 @@
-CONST VERSION = "v0.1.0-beta"
+VAR VERSION = "v0.1.0-gamma"
 
 INCLUDE 1_1.ink
 INCLUDE 1_2.ink
@@ -70,7 +70,7 @@ VAR t_target_name = ""
 	+ + [瞬间]
 		#SET: optionSpeed "instant"
 + [调节重要游戏节点显示]
-	+ + [显示]
+	+ + [不显示]
 		#SET: processShiny false
 	+ + [显示]
 		#SET: processShiny true
