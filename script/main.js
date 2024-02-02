@@ -139,10 +139,8 @@ function continueStory(firstTime) {
         var customClasses = []
         var appendList = []
         for (var i = 0; i < tags.length; i++) {
-            var tag = tags[i];
-
-            // Detect tags of the form "X: Y"
-            var splitTag = splitPropertyTag(tag);
+            var tag = tags[i]
+            var splitTag = splitPropertyTag(tag)
 
             // APPEAR: situation
             if (splitTag && splitTag.property == "APPEAR") {
@@ -157,24 +155,24 @@ function continueStory(firstTime) {
             }
             // AUDIO: src
             else if (splitTag && splitTag.property == "AUDIO") {
-                if ('audio' in this) {
-                    this.audio.pause();
-                    this.audio.removeAttribute('src');
-                    this.audio.load();
+                if ('audio' in varBoard) {
+                    varBoard.audio.pause()
+                    varBoard.audio.removeAttribute('src')
+                    varBoard.audio.load()
                 }
-                this.audio = new Audio(splitTag.val);
-                this.audio.play();
+                varBoard.audio = new Audio(splitTag.val)
+                varBoard.audio.play()
             }
             // AUDIOLOOP: src
             else if (splitTag && splitTag.property == "AUDIOLOOP") {
-                if ('audioLoop' in this) {
-                    this.audioLoop.pause();
-                    this.audioLoop.removeAttribute('src');
-                    this.audioLoop.load();
+                if ('audioLoop' in varBoard) {
+                    varBoard.audioLoop.pause()
+                    varBoard.audioLoop.removeAttribute('src')
+                    varBoard.audioLoop.load()
                 }
-                this.audioLoop = new Audio(splitTag.val);
-                this.audioLoop.play();
-                this.audioLoop.loop = true;
+                varBoard.audioLoop = new Audio(splitTag.val)
+                varBoard.audioLoop.play()
+                varBoard.audioLoop.loop = true
             }
             // AWARD: command name
             else if (splitTag && splitTag.property == "AWARD") {
