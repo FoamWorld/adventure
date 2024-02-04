@@ -312,20 +312,6 @@ function continueStory(firstTime) {
                 let vec = splitTag.val.split(' ', 2)
                 contactVar[vec[0]] = JSON.parse(vec[1])
             }
-            // UPCOMMENT: text
-            else if (splitTag && splitTag.property == "UPCOMMENT") {
-                let t1 = paragraphText
-                let t2 = splitTag.val
-                paragraphText = ""
-                let span = document.createElement("span")
-                span.className = "ruby"
-                span.innerText = t1
-                let rt = document.createElement("span")
-                rt.className = "rt"
-                rt.innerText = t2
-                span.append(rt)
-                appendList.push(span)
-            }
         }
         var paragraphElement = document.createElement('p')
         paragraphElement.innerHTML = paragraphText
