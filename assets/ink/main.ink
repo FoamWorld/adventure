@@ -1,4 +1,4 @@
-VAR VERSION = "v0.1.0-gamma"
+VAR VERSION = "v0.1.0"
 
 INCLUDE 1_1.ink
 INCLUDE 1_2.ink
@@ -31,7 +31,8 @@ VAR t_target_name = ""
 		作者：Rratic
 		使用工具：<a href="https:\/\/www.inklestudios.com/ink">Ink</a>
 		当前版本：{VERSION}
-		当前更新至：1-2
+		已完成内容：menu, 1-1
+		进行中内容：1-2
 		+ + + [返回] -> menu
 	+ + [许可信息] -> permission
 

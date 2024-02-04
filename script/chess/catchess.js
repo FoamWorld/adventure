@@ -1,6 +1,6 @@
 function cat_svg(color, color2, direction) {
 	let svg = new Image()
-	let ml = window.btoa(`<svg xmlns="http://www.w3.org/2000/svg">
+	let ml = window.btoa(`<svg xmlns="http://www.w3.org/2000/svg" width="480" height="480">
 	<path fill="${color}" d="M 418.606,150 A 200 200 0 0 ${direction} 61.394,330 M 61.394,330 L 110,270 L 180,270 L 240,330 L 240,150 L 300,210 L 370,210 L 418.606,150 Z"/>
 	${direction == 1 ?
 			`<circle cx="300" cy="260" r="10" fill="${color2}"/><circle cx="370" cy="260" r="10" fill="${color2}"/>` :

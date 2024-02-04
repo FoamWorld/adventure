@@ -1,9 +1,17 @@
 extraScripts["catchess_test"] = function (command) {
 	if (command == "init") {
+		let maxWidth = document.body.clientWidth
+		if (maxWidth > 512)
+			maxWidth = 512
+		else if (maxWidth < 256)
+			maxWidth = 256
+		else
+			maxWidth = Math.floor(maxWidth / 32) * 32
+
 		let cvs = document.createElement("canvas")
 		cvs.id = "canvas"
-		cvs.width = 512
-		cvs.height = 512
+		cvs.width = maxWidth
+		cvs.height = maxWidth
 		document.getElementById("story").append(cvs)
 
 		let board = catchessRules.__init__()

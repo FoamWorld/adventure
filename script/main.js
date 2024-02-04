@@ -16,7 +16,10 @@ var varBoard = {};
 var extraScriptsLoaded = new Set()
 var extraScripts = {
     "include": function (path) {
-        if (extraScriptsLoaded.has(path)) return
+        if (extraScriptsLoaded.has(path)) {
+            console.debug(`路径 ${path} 已导入`)
+            return
+        }
         let script = document.createElement("script")
         script.src = path
         document.body.append(script)
@@ -123,16 +126,12 @@ function continueStory(firstTime) {
     var paragraphIndex = 0;
     var delay = 0.0;
 
-    // Don't over-scroll past new content
     var previousBottomEdge = firstTime ? 0 : contentBottomEdgeY();
 
     var prependChoices = []
     var activeList = null
     var choiceAfter = []
-    // Generate story text - loop through available content
     while (story.canContinue) {
-
-        // Get ink to generate the next paragraph
         var paragraphText = story.Continue();
         var tags = story.currentTags;
 
@@ -298,10 +297,15 @@ function continueStory(firstTime) {
                 restart()
                 return
             }
-            // SCRIPT: oper name
+            // SCRIPT: name operation
             else if (splitTag && splitTag.property == "SCRIPT") {
                 let vec = splitTag.val.split(':', 2)
-                extraScripts[vec[0].trim()](vec[1].trim())
+                let name = vec[0].trim()
+                let f = extraScripts[name]
+                if (f == undefined)
+                    console.error(`脚本 ${name} 未引入`)
+                else
+                    f(vec[1].trim())
             }
             // SET: varname
             else if (splitTag && splitTag.property == "SET") {
@@ -323,8 +327,6 @@ function continueStory(firstTime) {
                 appendList.push(span)
             }
         }
-
-        // Create paragraph element (initially hidden)
         var paragraphElement = document.createElement('p')
         paragraphElement.innerHTML = paragraphText
         for (let t of appendList)
@@ -349,7 +351,6 @@ function continueStory(firstTime) {
     for (let i of prependChoices)
         storyContainer.appendChild(i)
 
-    // Create HTML choices from ink choices
     let choiceNum = story.currentChoices.length
     let isInstant = contactVar["optionSpeed"] == "instant" || choiceNum > 8
     story.currentChoices.forEach(function (choice) {
@@ -381,9 +382,7 @@ function restart() {
     outerScrollContainer.scrollTo(0, 0)
 }
 
-// -----------------------------------
-// Various Helper functions
-// -----------------------------------
+/* * * Helper * * */
 
 function complexDelay(delay, el) {
     let del = contactVar["textSpeed"]
@@ -418,20 +417,14 @@ function display_ends(container) {
     container.push(ul)
 }
 
-// Fades in an element after a specified delay
 function showAfter(delay, el) {
     el.classList.add("hide");
     setTimeout(function () { el.classList.remove("hide") }, delay);
 }
 
-// Scrolls the page down, but no further than the bottom edge of what you could
-// see previously, so it doesn't go too far.
 function scrollDown(previousBottomEdge) {
-
-    // Line up top of screen with the bottom of where the previous content ended
     var target = previousBottomEdge;
 
-    // Can't go further than the very bottom of the page
     var limit = outerScrollContainer.scrollHeight - outerScrollContainer.clientHeight;
     if (target > limit) target = limit;
 
@@ -443,22 +436,18 @@ function scrollDown(previousBottomEdge) {
     function step(time) {
         if (startTime == null) startTime = time;
         var t = (time - startTime) / duration;
-        var lerp = 3 * t * t - 2 * t * t * t; // ease in/out
+        var lerp = 3 * t * t - 2 * t * t * t;
         outerScrollContainer.scrollTo(0, (1.0 - lerp) * start + lerp * target);
         if (t < 1) requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
 }
 
-// The Y coordinate of the bottom end of all the story content, used
-// for growing the container, and deciding how far to scroll.
 function contentBottomEdgeY() {
     var bottomElement = storyContainer.lastElementChild;
     return bottomElement ? bottomElement.offsetTop + bottomElement.offsetHeight : 0;
 }
 
-// Remove all elements that match the given selector. Used for removing choices after
-// you've picked one, as well as for the CLEAR and RESTART tags.
 function removeAll(selector) {
     var allElements = storyContainer.querySelectorAll(selector);
     for (var i = 0; i < allElements.length; i++) {
@@ -467,7 +456,6 @@ function removeAll(selector) {
     }
 }
 
-// Used for hiding and showing the header when you CLEAR or RESTART the story respectively.
 function setVisible(selector, visible) {
     var allElements = storyContainer.querySelectorAll(selector);
     for (var i = 0; i < allElements.length; i++) {
@@ -479,9 +467,6 @@ function setVisible(selector, visible) {
     }
 }
 
-// Helper for parsing out tags of the form:
-//  # PROPERTY: value
-// e.g. IMAGE: source path
 function splitPropertyTag(tag) {
     var propertySplitIdx = tag.indexOf(":");
     if (propertySplitIdx != null) {
@@ -525,7 +510,6 @@ function setupTheme(globalTagTheme) {
         console.debug("无法打开保存的状态")
     }
 
-    // Check whether the OS/browser is configured for dark mode
     var browserDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
     if (savedTheme === "dark"
@@ -534,7 +518,6 @@ function setupTheme(globalTagTheme) {
         document.body.classList.add("dark");
 }
 
-// Used to hook up the functionality for global functionality buttons
 function setupButtons(hasSave) {
     let rewindEl = document.getElementById("rewind");
     if (rewindEl) rewindEl.addEventListener("click", function (event) {
@@ -550,7 +533,8 @@ function setupButtons(hasSave) {
             localStorage.setItem(`${PROJECT_NAME}-contact`, JSON.stringify(contactVar))
             document.getElementById("reload").removeAttribute("disabled")
             saveExtra()
-        } catch (e) {
+        }
+        catch (e) {
             console.error(e)
             console.warn("无法保存状态")
         }

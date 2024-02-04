@@ -70,16 +70,18 @@ h2 {
     display: block;
     margin: 0;
     padding: 0;
-    -webkit-overflow-scrolling: touch;
-    overflow: scroll;
     overflow-x: hidden;
-    height: 100%;
     width: 100%;
     top: 0;
     left: 0;
     margin-top: 24px;
     background-size: cover;
     background-repeat: no-repeat;
+}
+
+.iframed.outerContainer {
+    overflow: scroll;
+    height: 100%;
 }
 
 @media screen and (max-width: 980px) {
@@ -290,6 +292,7 @@ h4 {
 }
 
 .input {
+    width: -webkit-fill-available;
     margin: 20px;
     padding: 10px;
     padding-left: 20px;
