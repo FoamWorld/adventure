@@ -262,11 +262,17 @@ body.dark {
     background: black;
 }
 
-/* * * * Special * * * */
+/*
+  Special
+*/
 h3,
 h4 {
     text-align: center;
     font-family: "Quattrocento", Georgia, 'Times New Roman', Times, serif;
+}
+
+.box-hide {
+    display: none;
 }
 
 .copyable {

@@ -1,16 +1,24 @@
 const PROJECT_NAME = "adventure";
 var dataset = {};
-fetch("assets/data/awards.json")
-    .then(response => {
-        if (!response.ok) {
-            console.error("HTTP error " + response.status)
-            return null
-        }
-        return response.json()
-    })
-    .then(data => {
-        dataset["awards"] = data
-    });
+
+function fetch_awards() {
+    fetch("assets/data/awards.json")
+        .then(response => {
+            if (!response.ok) {
+                let msg = `HTTP Error ${response.status} (${response.statusText})`
+                console.error(msg)
+                putNotification(msg, fetch_awards)
+                return null
+            }
+            return response.json()
+        }, error => {
+            putNotification(error.stack)
+        })
+        .then(data => {
+            dataset["awards"] = data
+        })
+};
+fetch_awards();
 
 var varBoard = {};
 var extraScriptsLoaded = new Set()
@@ -302,8 +310,15 @@ function continueStory(firstTime) {
                 let vec = splitTag.val.split(':', 2)
                 let name = vec[0].trim()
                 let f = extraScripts[name]
-                if (f == undefined)
-                    console.error(`脚本 ${name} 未引入`)
+                if (f == undefined) {
+                    let msg = `扩展 ${name} 未引入`
+                    console.error(msg)
+                    putNotification(msg, function (_) {
+                        try {
+                            extraScripts.include(`script/extra/${name}.js`)
+                        } catch (e) { putNotification(e) }
+                    })
+                }
                 else
                     f(vec[1].trim())
             }
@@ -470,6 +485,7 @@ function splitPropertyTag(tag) {
 function loadSavePoint() {
     try {
         let savedVersion = localStorage.getItem(`${PROJECT_NAME}-version`)
+        if (savedVersion == undefined) return false
         let currentVersion = ink_var("VERSION").value
         if (savedVersion != currentVersion) {
             let conf = window.confirm(`存档版本 ${savedVersion} 与当前版本 ${currentVersion} 不匹配，是否尝试加载？`)
@@ -522,6 +538,7 @@ function setupButtons(hasSave) {
         }
         catch (e) {
             console.error(e)
+            putNotification(e)
             console.warn("无法保存状态")
         }
     })
