@@ -1,4 +1,4 @@
-VAR VERSION = "v0.1.0"
+VAR VERSION = "v0.1.1"
 
 INCLUDE 1_1.ink
 INCLUDE 1_2.ink
@@ -28,8 +28,7 @@ VAR t_target_name = ""
 + [统计数据] -> statistics
 + [作品信息]
 	+ + [关于]
-		作者：Rratic
-		使用工具：<a href="https:\/\/www.inklestudios.com/ink">Ink</a>
+		项目仓库：<a href="https:\/\/github.com/foamworld/adventure">Github: FoamWorld/Adventure</a>
 		当前版本：{VERSION}
 		已完成内容：menu, 1-1
 		进行中内容：1-2
@@ -108,7 +107,9 @@ VAR t_target_name = ""
 
 == permission ==
 #CLEAR
-本作品按照 CC BY-SA 协议许可。使用的素材资源包括：
+<a href="https:\/\/github.com/foamworld/adventure?tab=readme-ov-file">README: 许可说明</a>
+
+使用的素材资源包括：
 <hr>
 <h3>来自 Wikidot（scp-cn）的设定参考（CC BY-SA）</h3>
 注：作者信息可见于对应的页面中 #CLASS: help

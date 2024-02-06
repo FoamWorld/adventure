@@ -17,7 +17,7 @@
 未完待续
 -> ending
 
-== c_end_a ==
+== c_end_escape ==
 退场 #END: common
 我们生活在一个名为无知的平静小岛上，被无穷无尽的黑色海洋包围，而我们本就不该扬帆远航。——H.P.Lovecraft #CLASS: help
 -> ending

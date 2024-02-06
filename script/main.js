@@ -1,13 +1,13 @@
 const PROJECT_NAME = "adventure";
 var dataset = {};
 
-function fetch_awards() {
-    fetch("assets/data/awards.json")
+function fetch_data(key) {
+    fetch(`assets/data/${key}.json`)
         .then(response => {
             if (!response.ok) {
                 let msg = `HTTP Error ${response.status} (${response.statusText})`
                 console.error(msg)
-                putNotification(msg, fetch_awards)
+                putNotification(msg, function () { fetch_data(key) })
                 return null
             }
             return response.json()
@@ -15,10 +15,10 @@ function fetch_awards() {
             putNotification(error.stack)
         })
         .then(data => {
-            dataset["awards"] = data
+            dataset[key] = data
         })
 };
-fetch_awards();
+fetch_data("awards");
 
 var varBoard = {};
 var extraScriptsLoaded = new Set()
@@ -400,17 +400,19 @@ function display_awards(container) {
     let ul = document.createElement("ul")
     for (let key in awards) {
         let li = document.createElement("li")
-        li.innerText = key
+        li.innerText = dataset["awards"][key].text
         ul.append(li)
     }
     container.push(ul)
 }
 
 function display_ends(container) {
+    const types = { "common": "普通", "unusual": "正常", "rare": "稀有", "epic": "史诗", "legendary": "传奇", "mythic": "神话", "bad": "坏", "good": "好", "true": "真" }
     let endings = statistics["end"]
     let ul = document.createElement("ul")
-    for (let key in endings) {
-        let keyname = { "common": "普通", "unusual": "正常", "rare": "稀有", "epic": "史诗", "legendary": "传奇", "mythic": "神话", "bad": "坏", "good": "好", "true": "真" }[key] + "结局："
+    for (let key in types) {
+        if (endings[key] == undefined) continue
+        let keyname = types[key] + "结局："
         let li = document.createElement("li")
         li.innerText = keyname + JSON.stringify(endings[key])
         ul.append(li)
