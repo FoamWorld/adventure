@@ -73,12 +73,12 @@
 
 == u_end_too_observable ==
 你知道的太多了 #END: unusual
-不用说的话可以不说。#CLASS: help
+死人才可以保守秘密……一般情况下 #CLASS: help
 -> ending
 
 == u_end_why ==
 为什么 #END: unusual
-为什么呢？ #CLASS: help
+这是一个通用的结局 #CLASS: help
 -> ending
 
 == r_end_experimented ==
