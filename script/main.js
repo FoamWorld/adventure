@@ -526,6 +526,7 @@ function setupButtons(hasSave) {
     let rewindEl = document.getElementById("rewind");
     if (rewindEl) rewindEl.addEventListener("click", function (event) {
         storyContainer.replaceChildren()
+        storyContainer.classList.remove("box-hide")
         restart()
     })
 
@@ -551,6 +552,7 @@ function setupButtons(hasSave) {
     }
     reloadEl.addEventListener("click", function (event) {
         storyContainer.replaceChildren()
+        storyContainer.classList.remove("box-hide")
         loadSavePoint()
         continueStory(true)
         outerScrollContainer.scrollTo(0, 0)
