@@ -1,6 +1,8 @@
 const PROJECT_NAME = "adventure";
-var dataset = {};
+const PROJECT_TITLE = "Adventure";
+const PROJECT_BYLINE = "by Rratic";
 
+var dataset = {};
 function fetch_data(key) {
     fetch(`assets/data/${key}.json`)
         .then(response => {
@@ -17,22 +19,6 @@ function fetch_data(key) {
         .then(data => {
             dataset[key] = data
         })
-};
-fetch_data("awards");
-
-var varBoard = {};
-var extraScriptsLoaded = new Set()
-var extraScripts = {
-    "include": function (path) {
-        if (extraScriptsLoaded.has(path)) {
-            console.debug(`路径 ${path} 已导入`)
-            return
-        }
-        let script = document.createElement("script")
-        script.src = path
-        document.body.append(script)
-        extraScriptsLoaded.add(path)
-    }
 };
 
 var story;
@@ -76,44 +62,6 @@ var contactVar = {
     textSpeed: 200.0,
 }
 
-/* 保存点
- + contactVar
- + ink_var("VERSION").value
- + story.state
- - statistics
- - theme
- */
-function packSavePoint() {
-    return {
-        contactVar: JSON.stringify(contactVar),
-        savedState: story.state.toJson(),
-        savedVersion: ink_var("VERSION").value,
-    }
-}
-function unpackSavePoint(json) {
-    contactVar = JSON.parse(json.contactVar)
-    story.ResetState()
-    story.state.LoadJson(json.savedState)
-}
-function saveExtra() {
-    localStorage.setItem('ink-theme', document.body.classList.contains("dark") ? "dark" : "")
-    localStorage.setItem(`${PROJECT_NAME}-statistics`, JSON.stringify(statistics))
-}
-
-var checkPoint;
-function backCheckPoint() {
-    if (!(checkPoint instanceof Object)) return
-    storyContainer.replaceChildren()
-    try {
-        unpackSavePoint(checkPoint)
-    }
-    catch (e) {
-        console.debug("无法打开保存的状态")
-    }
-    continueStory(true)
-    outerScrollContainer.scrollTo(0, 0)
-}
-
 /* * * Main * * */
 story = new inkjs.Story(storyContent)
 var savePoint = ""
@@ -129,11 +77,11 @@ setupButtons(hasSave)
 savePoint = story.state.toJson()
 continueStory(true)
 
+var tagOptions = {
+    "CLEAR": function () { storyContainer.replaceChildren() },
+};
 function continueStory(firstTime) {
-
-    var paragraphIndex = 0;
     var delay = 0.0;
-
     var previousBottomEdge = firstTime ? 0 : contentBottomEdgeY();
 
     var prependChoices = []
@@ -148,52 +96,24 @@ function continueStory(firstTime) {
         for (var i = 0; i < tags.length; i++) {
             var tag = tags[i]
             var splitTag = splitPropertyTag(tag)
-
+            var tprop = splitTag.property
+            if (tagOptions[tprop] != undefined) {
+                tagOptions[tprop](splitTag.val)
+                continue
+            }
             // APPEAR: situation
-            if (splitTag && splitTag.property == "APPEAR") {
+            if (tprop == "APPEAR") {
                 if (splitTag.val == "main-title") {
                     let div = createQElement("div", { className: "header" })
                     div.append(
-                        createQElement("h1", { innerText: "Adventure" }),
-                        createQElement("h2", { className: "byline", innerText: "by Rratic" })
+                        createQElement("h1", { innerText: PROJECT_TITLE }),
+                        createQElement("h2", { className: "byline", innerText: PROJECT_BYLINE })
                     )
                     storyContainer.prepend(div)
                 }
             }
-            // AUDIO: src
-            else if (splitTag && splitTag.property == "AUDIO") {
-                if ('audio' in varBoard) {
-                    varBoard.audio.pause()
-                    varBoard.audio.removeAttribute('src')
-                    varBoard.audio.load()
-                }
-                varBoard.audio = new Audio(splitTag.val)
-                varBoard.audio.play()
-            }
-            // AUDIOLOOP: src
-            else if (splitTag && splitTag.property == "AUDIOLOOP") {
-                if ('audioLoop' in varBoard) {
-                    varBoard.audioLoop.pause()
-                    varBoard.audioLoop.removeAttribute('src')
-                    varBoard.audioLoop.load()
-                }
-                varBoard.audioLoop = new Audio(splitTag.val)
-                varBoard.audioLoop.play()
-                varBoard.audioLoop.loop = true
-            }
-            // AWARD: command name
-            else if (splitTag && splitTag.property == "AWARD") {
-                let args = splitTag.val.split(' ')
-                let type = args.shift(1)
-                if (type == "give")
-                    statistics["award"][args[0]] = true
-            }
-            // BACKGROUND: src
-            else if (splitTag && splitTag.property == "BACKGROUND") {
-                outerScrollContainer.style.backgroundImage = 'url(' + splitTag.val + ')';
-            }
             // CHECKPOINT
-            else if (splitTag && splitTag.property == "CHECKPOINT") {
+            else if (tprop == "CHECKPOINT") {
                 if (splitTag.val == "set") {
                     checkPoint = packSavePoint()
                     document.getElementById("backwards").removeAttribute("disabled")
@@ -207,40 +127,23 @@ function continueStory(firstTime) {
                 }
             }
             // CLASS: className
-            else if (splitTag && splitTag.property == "CLASS") {
+            else if (tprop == "CLASS") {
                 customClasses.push(splitTag.val);
             }
-            // CLEAR
-            else if (tag == "CLEAR") {
-                storyContainer.replaceChildren()
-            }
             // DELAY: time
-            else if (splitTag && splitTag.property == "DELAY") {
+            else if (tprop == "DELAY") {
                 delay += new Number(splitTag.val)
             }
             // DISPLAY: varname
-            else if (splitTag && splitTag.property == "DISPLAY") {
+            else if (tprop == "DISPLAY") {
                 appendList.push(createQElement("h2", { innerText: splitTag.val }))
                 if (splitTag.val == "ends")
-                    display_ends(appendList)
+                    appendList.push(display_endings())
                 else if (splitTag.val == "awards")
-                    display_awards(appendList)
-            }
-            // END: type
-            else if (splitTag && splitTag.property == "END") {
-                storyContainer.appendChild(document.createElement("hr"))
-                let type = splitTag.val
-                let name = paragraphText.trim()
-                customClasses.push(type + "-end")
-                if (statistics.end[type] == undefined)
-                    statistics.end[type] = {}
-                if (statistics.end[type][name] == undefined)
-                    statistics.end[type][name] = 1
-                else
-                    statistics.end[type][name] += 1
+                    appendList.push(display_awards())
             }
             // INPUT: varname
-            else if (splitTag && splitTag.property == "INPUT") {
+            else if (tprop == "INPUT") {
                 let input = document.createElement("input")
                 input.type = "text"
                 input.className = "input"
@@ -251,29 +154,8 @@ function continueStory(firstTime) {
                     ink_var(splitTag.val).value = input.value
                 })
             }
-            // IMAGE: src
-            if (splitTag && splitTag.property == "IMAGE" && contactVar["displayImage"]) {
-                var imageElement = document.createElement('img');
-                imageElement.src = splitTag.val;
-                storyContainer.appendChild(imageElement);
-
-                delay += complexDelay(delay, paragraphElement)
-            }
-            // LINK: url
-            else if (splitTag && splitTag.property == "LINK") {
-                let linkElement = document.createElement('a')
-                let url = "https://" + splitTag.val
-                linkElement.href = url
-                linkElement.target = "_blank"
-                linkElement.innerText = url
-                appendList.push(linkElement)
-            }
-            // LINKOPEN: url
-            else if (splitTag && splitTag.property == "LINKOPEN") {
-                window.open(splitTag.val);
-            }
             // LIST: begin/end
-            else if (splitTag && splitTag.property == "LIST") {
+            else if (tprop == "LIST") {
                 if (splitTag.val == "begin") {
                     activeList = createQElement("ul")
                     storyContainer.appendChild(activeList)
@@ -282,7 +164,7 @@ function continueStory(firstTime) {
                     activeList = null
             }
             // RANDOM: type args...
-            else if (splitTag && splitTag.property == "RANDOM") {
+            else if (tprop == "RANDOM") {
                 let mode = contactVar["randomMode"]
                 let value = undefined
                 let args = splitTag.val.split(' ')
@@ -301,29 +183,12 @@ function continueStory(firstTime) {
                 }
             }
             // RESTART
-            else if (tag == "RESTART") {
+            else if (tprop == "RESTART") {
                 restart()
                 return
             }
-            // SCRIPT: name operation
-            else if (splitTag && splitTag.property == "SCRIPT") {
-                let vec = splitTag.val.split(':', 2)
-                let name = vec[0].trim()
-                let f = extraScripts[name]
-                if (f == undefined) {
-                    let msg = `扩展 ${name} 未引入`
-                    console.error(msg)
-                    putNotification(msg, function (_) {
-                        try {
-                            extraScripts.include(`script/extra/${name}.js`)
-                        } catch (e) { putNotification(e) }
-                    })
-                }
-                else
-                    f(vec[1].trim())
-            }
             // SET: varname
-            else if (splitTag && splitTag.property == "SET") {
+            else if (tprop == "SET") {
                 let vec = splitTag.val.split(' ', 2)
                 contactVar[vec[0]] = JSON.parse(vec[1])
             }
@@ -395,31 +260,6 @@ function complexDelay(delay, el) {
     }
 }
 
-function display_awards(container) {
-    let awards = statistics["award"]
-    let ul = document.createElement("ul")
-    for (let key in awards) {
-        let li = document.createElement("li")
-        li.innerText = dataset["awards"][key].text
-        ul.append(li)
-    }
-    container.push(ul)
-}
-
-function display_ends(container) {
-    const types = { "common": "普通", "unusual": "正常", "rare": "稀有", "epic": "史诗", "legendary": "传奇", "mythic": "神话", "bad": "坏", "good": "好", "true": "真" }
-    let endings = statistics["end"]
-    let ul = document.createElement("ul")
-    for (let key in types) {
-        if (endings[key] == undefined) continue
-        let keyname = types[key] + "结局："
-        let li = document.createElement("li")
-        li.innerText = keyname + JSON.stringify(endings[key])
-        ul.append(li)
-    }
-    container.push(ul)
-}
-
 function showAfter(delay, el) {
     el.classList.add("hide");
     setTimeout(function () { el.classList.remove("hide") }, delay);
@@ -459,50 +299,18 @@ function removeAll(selector) {
     }
 }
 
-function setVisible(selector, visible) {
-    var allElements = storyContainer.querySelectorAll(selector);
-    for (var i = 0; i < allElements.length; i++) {
-        var el = allElements[i];
-        if (!visible)
-            el.classList.add("invisible");
-        else
-            el.classList.remove("invisible");
-    }
-}
-
 function splitPropertyTag(tag) {
-    var propertySplitIdx = tag.indexOf(":");
-    if (propertySplitIdx != null) {
-        var property = tag.substr(0, propertySplitIdx).trim();
-        var val = tag.substr(propertySplitIdx + 1).trim();
+    var propertySplitIdx = tag.indexOf(":")
+    if (propertySplitIdx != null)
         return {
-            property: property,
-            val: val
-        };
-    }
-
-    return null;
-}
-
-function loadSavePoint() {
-    try {
-        let savedVersion = localStorage.getItem(`${PROJECT_NAME}-version`)
-        if (savedVersion == undefined) return false
-        let currentVersion = ink_var("VERSION").value
-        if (savedVersion != currentVersion) {
-            let conf = window.confirm(`存档版本 ${savedVersion} 与当前版本 ${currentVersion} 不匹配，是否尝试加载？`)
-            if (!conf) throw ("加载被拒绝")
+            property: tag.substr(0, propertySplitIdx).trim(),
+            val: tag.substr(propertySplitIdx + 1).trim()
         }
-        let savedState = localStorage.getItem(`${PROJECT_NAME}-save-state`)
-        if (savedState) story.state.LoadJson(savedState)
-        contactVar = JSON.parse(localStorage.getItem(`${PROJECT_NAME}-contact`))
-        merge(statistics, JSON.parse(localStorage.getItem(`${PROJECT_NAME}-statistics`)))
-        return true
-    }
-    catch (e) {
-        console.debug("无法打开保存的状态")
-    }
-    return false
+    else
+        return {
+            property: tag,
+            val: ""
+        }
 }
 
 function setupTheme(globalTagTheme) {
