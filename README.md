@@ -9,7 +9,7 @@
 
 `assets/css/ink.css` 参考了 [inkle](https://github.com/inkle) 提供的标准代码。
 
-`assets/ink` 下文件使用 CC BY-SA 许可，所用素材资源的列举可见于作品信息->许可信息部分。
+`assets/ink` 下文件使用 CC BY-SA 许可，所用素材资源的列举可见于[素材列表](./source_list.html)。
 
 `script/story.js` 由 `assets/ink` 下文件使用 [Inky](https://github.com/inkle/inky) 生成，使用 CC BY-SA 许可。
 

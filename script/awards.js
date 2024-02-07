@@ -1,5 +1,5 @@
 fetch_data("awards");
-tagOptions.award = function (val) { // option name
+tagOptions.AWARD = function (val) { // option name
 	let args = val.split(' ')
 	let type = args.shift(1)
 	if (type == "give") {

@@ -1,4 +1,4 @@
-tagOptions.end = function (val) {
+tagOptions.END = function (val) {
 	storyContainer.appendChild(document.createElement("hr"))
 	let name = paragraphText.trim()
 	customClasses.push(val + "-end")

@@ -78,6 +78,7 @@ continueStory(true)
 
 var tagOptions = {
     "CLEAR": function () { storyContainer.replaceChildren() },
+    "RESTART": function () { restart(); return -1 }
 };
 function continueStory(firstTime) {
     var delay = 0.0;
@@ -96,13 +97,15 @@ function continueStory(firstTime) {
             var tag = tags[i]
             var splitTag = splitPropertyTag(tag)
             var tprop = splitTag.property
+            var val = splitTag.val
             if (tagOptions[tprop] != undefined) {
-                tagOptions[tprop](splitTag.val)
+                let signal = tagOptions[tprop](val, { appendList: appendList })
+                if (signal == -1) return
                 continue
             }
             // APPEAR: situation
             if (tprop == "APPEAR") {
-                if (splitTag.val == "main-title") {
+                if (val == "main-title") {
                     let div = createQElement("div", { className: "header" })
                     div.append(
                         createQElement("h1", { innerText: PROJECT_TITLE }),
@@ -111,34 +114,20 @@ function continueStory(firstTime) {
                     storyContainer.prepend(div)
                 }
             }
-            // CHECKPOINT
-            else if (tprop == "CHECKPOINT") {
-                if (splitTag.val == "set") {
-                    checkPoint = packSavePoint()
-                    document.getElementById("backwards").removeAttribute("disabled")
-                    if (contactVar["processShiny"]) {
-                        appendList.push(noticeable("#CHECKPOINT#"))
-                    }
-                }
-                else if (splitTag.val == "jump") {
-                    backCheckPoint()
-                    return
-                }
-            }
             // CLASS: className
             else if (tprop == "CLASS") {
-                customClasses.push(splitTag.val);
+                customClasses.push(val);
             }
             // DELAY: time
             else if (tprop == "DELAY") {
-                delay += new Number(splitTag.val)
+                delay += new Number(val)
             }
             // DISPLAY: varname
             else if (tprop == "DISPLAY") {
-                appendList.push(createQElement("h2", { innerText: splitTag.val }))
-                if (splitTag.val == "ends")
+                appendList.push(createQElement("h2", { innerText: val }))
+                if (val == "ends")
                     appendList.push(display_endings())
-                else if (splitTag.val == "awards")
+                else if (val == "awards")
                     appendList.push(display_awards())
             }
             // INPUT: varname
@@ -146,27 +135,27 @@ function continueStory(firstTime) {
                 let input = document.createElement("input")
                 input.type = "text"
                 input.className = "input"
-                input.value = ink_var(splitTag.val).value
+                input.value = ink_var(val).value
                 input.placeholder = "input"
                 prependChoices.push(input)
                 choiceAfter.push(function () {
-                    ink_var(splitTag.val).value = input.value
+                    ink_var(val).value = input.value
                 })
             }
             // LIST: begin/end
             else if (tprop == "LIST") {
-                if (splitTag.val == "begin") {
+                if (val == "begin") {
                     activeList = createQElement("ul")
                     storyContainer.appendChild(activeList)
                 }
-                else if (splitTag.val == "end")
+                else if (val == "end")
                     activeList = null
             }
             // RANDOM: type args...
             else if (tprop == "RANDOM") {
                 let mode = contactVar["randomMode"]
                 let value = undefined
-                let args = splitTag.val.split(' ')
+                let args = val.split(' ')
                 let type = args.shift(1)
                 if (mode == "normal") {
                     if (type == "uniform_int_distribution") {
@@ -175,20 +164,15 @@ function continueStory(firstTime) {
                     }
                 }
                 else if (mode == "editable") {
-                    ink_var("t_random").value = Number(window.prompt(splitTag.val, args[0]))
+                    ink_var("t_random").value = Number(window.prompt(val, args[0]))
                 }
                 if (contactVar["processShiny"]) {
                     appendList.push(noticeable(`%RANDOM: ${value}%`))
                 }
             }
-            // RESTART
-            else if (tprop == "RESTART") {
-                restart()
-                return
-            }
             // SET: varname
             else if (tprop == "SET") {
-                let vec = splitTag.val.split(' ', 2)
+                let vec = val.split(' ', 2)
                 contactVar[vec[0]] = JSON.parse(vec[1])
             }
         }
@@ -247,8 +231,6 @@ function restart() {
     outerScrollContainer.scrollTo(0, 0)
 }
 
-/* * * Helper * * */
-
 function complexDelay(delay, el) {
     let del = contactVar["textSpeed"]
     if (del == "instant")
@@ -290,14 +272,6 @@ function contentBottomEdgeY() {
     return bottomElement ? bottomElement.offsetTop + bottomElement.offsetHeight : 0;
 }
 
-function removeAll(selector) {
-    var allElements = storyContainer.querySelectorAll(selector);
-    for (var i = 0; i < allElements.length; i++) {
-        var el = allElements[i];
-        el.parentNode.removeChild(el);
-    }
-}
-
 function splitPropertyTag(tag) {
     var propertySplitIdx = tag.indexOf(":")
     if (propertySplitIdx != null)
@@ -310,72 +284,4 @@ function splitPropertyTag(tag) {
             property: tag,
             val: ""
         }
-}
-
-function setupTheme(globalTagTheme) {
-    var savedTheme
-    try {
-        savedTheme = localStorage.getItem('ink-theme')
-    }
-    catch (e) {
-        console.debug("无法打开保存的状态")
-    }
-
-    var browserDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-    if (savedTheme === "dark"
-        || (savedTheme == undefined && globalTagTheme === "dark")
-        || (savedTheme == undefined && globalTagTheme == undefined && browserDark))
-        document.body.classList.add("dark");
-}
-
-function setupButtons(hasSave) {
-    let rewindEl = document.getElementById("rewind");
-    if (rewindEl) rewindEl.addEventListener("click", function (event) {
-        storyContainer.replaceChildren()
-        storyContainer.classList.remove("box-hide")
-        restart()
-    })
-
-    let saveEl = document.getElementById("save")
-    if (saveEl) saveEl.addEventListener("click", function (event) {
-        try {
-            localStorage.setItem(`${PROJECT_NAME}-version`, ink_var("VERSION").value)
-            localStorage.setItem(`${PROJECT_NAME}-save-state`, savePoint)
-            localStorage.setItem(`${PROJECT_NAME}-contact`, JSON.stringify(contactVar))
-            document.getElementById("reload").removeAttribute("disabled")
-            saveExtra()
-        }
-        catch (e) {
-            console.error(e)
-            putNotification(e)
-            console.warn("无法保存状态")
-        }
-    })
-
-    let reloadEl = document.getElementById("reload");
-    if (!hasSave) {
-        reloadEl.setAttribute("disabled", "disabled")
-    }
-    reloadEl.addEventListener("click", function (event) {
-        storyContainer.replaceChildren()
-        storyContainer.classList.remove("box-hide")
-        loadSavePoint()
-        continueStory(true)
-        outerScrollContainer.scrollTo(0, 0)
-    })
-
-    let backwardsEl = document.getElementById("backwards");
-    if (checkPoint == undefined) {
-        backwardsEl.setAttribute("disabled", "disabled")
-    }
-    backwardsEl.addEventListener("click", function (event) {
-        backCheckPoint()
-    })
-
-    let themeSwitchEl = document.getElementById("theme-switch")
-    if (themeSwitchEl) themeSwitchEl.addEventListener("click", function (event) {
-        document.body.classList.add("switched")
-        document.body.classList.toggle("dark")
-    })
 }

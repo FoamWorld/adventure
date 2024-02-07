@@ -102,22 +102,6 @@ VAR t_target_name = ""
 
 == permission ==
 #CLEAR
-<a href="https:\/\/github.com/foamworld/adventure?tab=readme-ov-file">README: 许可说明</a>
-
-使用的素材资源包括：
-<hr>
-<h3>来自 Wikidot（scp-cn）的设定参考（CC BY-SA）</h3>
-注：作者信息可见于对应的页面中 #CLASS: help
-#LIST: begin
-<a href="https:\/\/scp-wiki-cn.wikidot.com/goc-hub-page">全球超自然联盟档案</a>（1-2 中参考）
-<a href="https:\/\/scp-wiki-cn.wikidot.com/introduction-to-pataphysics">超形上学导论</a>（在 1-2 分支中出现）
-#LIST: end
-<hr>
-<h3>SCP Universe 相关其它来源的资料参考</h3>
-#LIST: begin
-通用设定
-#LIST: end
-<hr>
-图片如无标注均以来源为链接，遵循相关站点的协议许可。
+<a href="source_list.html">素材列表</a>
 #AWARD: give examine_permission
 + [返回] -> menu

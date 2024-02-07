@@ -50,3 +50,11 @@ function putNotification(content, extraF = undefined) {
 	storyContainer.parentNode.insertBefore(div, storyContainer)
 	storyContainer.classList.add("box-hide")
 }
+
+function removeAll(selector) {
+    var allElements = storyContainer.querySelectorAll(selector)
+    for (var i = 0; i < allElements.length; i++) {
+        var el = allElements[i]
+        el.parentNode.removeChild(el)
+    }
+}
