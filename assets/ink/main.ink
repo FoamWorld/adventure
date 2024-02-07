@@ -103,6 +103,6 @@ VAR t_target_name = ""
 
 == permission ==
 #CLEAR
-<a href="source_list.html">素材列表</a>
+<ul><li><a href="https:\/\/github.com/foamworld/adventure?tab=readme-ov-file">README: 许可说明</a></li><li><a href="source_list.html">素材列表</a></li></ul>
 #AWARD: give examine_permission
 + [返回] -> menu

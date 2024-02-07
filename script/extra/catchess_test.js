@@ -12,7 +12,11 @@ extraScripts["catchess_test"] = function (command) {
 		cvs.id = "canvas"
 		cvs.width = maxWidth
 		cvs.height = maxWidth
-		document.getElementById("story").append(cvs)
+		let container = document.createElement("p")
+		container.style.display = "flex"
+		container.style.justifyContent = "center"
+		container.appendChild(cvs)
+		document.getElementById("story").appendChild(container)
 
 		let board = catchessRules.__init__()
 		let uuid = crypto.randomUUID()

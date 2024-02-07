@@ -42,14 +42,14 @@ Dgeros：“欢迎来到……呃……你先把这个戴上。”
 - (opts)
 	* (asked) “你们这个组织叫什么？”
 		“<span class="ruby">特殊收容措施基金会（SCP 基金会）<span class="rt">Special Containment Procedures Foundation</span></span>。”
-		<img src="https:\/\/scp-wiki.wdfiles.com/local--files/theme%3Abasalt/basalt_scp_logo-for_lightmode.svg"/>
+		<img class="limited" src="https:\/\/scp-wiki.wdfiles.com/local--files/theme%3Abasalt/basalt_scp_logo-for_lightmode.svg"/>
 	* “你们是做什么的？”
 		“我们以<span class="ruby">收容<span class="rt">Secure</span></span>、<span class="ruby">控制<span class="rt">Contain</span></span>、<span class="ruby">保护<span class="rt">Protect</span></span>为宗旨，其对象是被我们称之为收容物/SCP 的……东西。”
 	* {asked} “你们对于世界持有怎样的态度？”
 		“我们所做的被称作‘必要之恶’。”
 	* {asked} “我们有哪些同行组织？”
 		“其实还挺多……我们最大的同行组织是<span class="ruby">全球超自然联盟（GOC）<span class="rt">Global Occult Coalition</span></span>。”
-		<img src="https:\/\/scp-wiki.wdfiles.com/local--files/goc-hub-page/GOC-Logo-v4.png"/>
+		<img class="limited" src="https:\/\/scp-wiki.wdfiles.com/local--files/goc-hub-page/GOC-Logo-v4.png"/>
 		“他们由 GOC 部门与 108 议会构成，游离在纯粹自由组织与个体政治组织之间；强项在于奇术。而我们比他们更加「超自然」。”
 		“其它还有蛇之手、欲肉教、破碎之神教会、地平线倡议、混沌分裂者等等。”
 	* “如果测试未通过会怎么样？”
