@@ -13,7 +13,7 @@ var extraScripts = {
 	}
 };
 
-tagOptions.SCRIPT = function (val) {
+tagOptions["SCRIPT"] = function (val) {
 	let vec = val.split(':', 2)
 	let name = vec[0].trim()
 	let f = extraScripts[name]

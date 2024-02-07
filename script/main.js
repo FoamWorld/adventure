@@ -63,18 +63,9 @@ var contactVar = {
 
 /* * * Main * * */
 story = new inkjs.Story(storyContent)
-var savePoint = ""
-let globalTagTheme
-
-// var globalTags = story.globalTags
+// story.globalTags
 var storyContainer = document.querySelector('#story')
 var outerScrollContainer = document.querySelector('.outerContainer')
-
-setupTheme(globalTagTheme)
-var hasSave = loadSavePoint()
-setupButtons(hasSave)
-savePoint = story.state.toJson()
-continueStory(true)
 
 var tagOptions = {
     "CLEAR": function () { storyContainer.replaceChildren() },
@@ -99,13 +90,17 @@ function continueStory(firstTime) {
             var tprop = splitTag.property
             var val = splitTag.val
             if (tagOptions[tprop] != undefined) {
-                let signal = tagOptions[tprop](val, { appendList: appendList })
+                let signal = tagOptions[tprop](val, {
+                    appendList: appendList,
+                    customClasses: customClasses,
+                    paragraphText: paragraphText,
+                })
                 if (signal == -1) return
                 continue
             }
             // APPEAR: situation
             if (tprop == "APPEAR") {
-                if (val == "main-title") {
+                if (val == "main-title" && document.getElementsByClassName("byline").length == 0) {
                     let div = createQElement("div", { className: "header" })
                     div.append(
                         createQElement("h1", { innerText: PROJECT_TITLE }),
@@ -274,12 +269,12 @@ function contentBottomEdgeY() {
 
 function splitPropertyTag(tag) {
     var propertySplitIdx = tag.indexOf(":")
-    if (propertySplitIdx != null)
+    if (propertySplitIdx >= 0)
         return {
             property: tag.substr(0, propertySplitIdx).trim(),
             val: tag.substr(propertySplitIdx + 1).trim()
         }
-    else
+    else // -1
         return {
             property: tag,
             val: ""

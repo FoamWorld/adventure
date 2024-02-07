@@ -1,7 +1,8 @@
-VAR VERSION = "v0.1.1"
+VAR VERSION = "v0.1.2"
 
 INCLUDE 1_1.ink
 INCLUDE 1_2.ink
+INCLUDE fragments.ink
 INCLUDE endings.ink
 
 // 重要变量

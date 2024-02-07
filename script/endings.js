@@ -1,7 +1,7 @@
-tagOptions.END = function (val) {
+tagOptions["END"] = function (val, variables) {
 	storyContainer.appendChild(document.createElement("hr"))
-	let name = paragraphText.trim()
-	customClasses.push(val + "-end")
+	let name = variables.paragraphText.trim()
+	variables.customClasses.push(val + "-end")
 	if (statistics.end[val] == undefined)
 		statistics.end[val] = {}
 	if (statistics.end[val][name] == undefined)

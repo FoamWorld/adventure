@@ -35,7 +35,7 @@ function backCheckPoint() {
     continueStory(true)
     outerScrollContainer.scrollTo(0, 0)
 }
-tagOptions.CHECKPOINT = function (val, variables) {
+tagOptions["CHECKPOINT"] = function (val, variables) {
     if (val == "set") {
         checkPoint = packSavePoint()
         document.getElementById("backwards").removeAttribute("disabled")
@@ -48,6 +48,14 @@ tagOptions.CHECKPOINT = function (val, variables) {
         return -1
     }
 }
+
+var savePoint = ""
+let globalTagTheme
+setupTheme(globalTagTheme)
+var hasSave = loadSavePoint()
+setupButtons(hasSave)
+savePoint = story.state.toJson()
+continueStory(true)
 
 function loadSavePoint() {
     try {
