@@ -54,7 +54,6 @@ function merge(st, st2) {
 
 // 可设置数据
 var contactVar = {
-    displayImage: true,
     optionSpeed: 200.0,
     player: {},
     processShiny: false,

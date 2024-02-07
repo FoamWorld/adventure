@@ -79,11 +79,6 @@ VAR t_target_name = ""
 		#SET: randomMode "normal"
 	+ + [自主设置随机结果]
 		#SET: randomMode "editable"
-+ [调节图片显示]
-	+ + [显示]
-		#SET: displayImage true
-	+ + [不显示]
-		#SET: displayImage false
 + [返回] -> menu
 -
 -> main
