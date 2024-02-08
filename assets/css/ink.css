@@ -271,7 +271,7 @@ h4 {
 }
 
 img.limited {
-    max-width: 60%;
+    width: 60%;
 }
 
 .box-hide {

@@ -178,7 +178,7 @@
 你们可以抹除我这一段的记忆？”
 “当然。”
 * [接受记忆删除]
-    -> u_end_dream
+    -> frag_escape_without_memory
 * {action} “我可以加入你们吗？”
     * * [QwQ] -> done
 

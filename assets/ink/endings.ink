@@ -54,9 +54,8 @@
 -> ending
 
 == u_end_dream ==
-// 触发：清除记忆
+#AWARD: check dr-il-bu-sh
 浮生一梦 #END: unusual
-不失为一个选择。又或许，有办法继续推进？ #CLASS: help
 -> ending
 
 == u_end_fail ==

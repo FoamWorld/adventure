@@ -41,17 +41,17 @@ Dgeros：“欢迎来到……呃……你先把这个戴上。”
 “在测试开始前，你想问些什么？我大体介绍一下，细节以后再说。”
 - (opts)
 	* (asked) “你们这个组织叫什么？”
-		“<span class="ruby">特殊收容措施基金会（SCP 基金会）<span class="rt">Special Containment Procedures Foundation</span></span>。”
-		<img class="limited" src="https:\/\/scp-wiki.wdfiles.com/local--files/theme%3Abasalt/basalt_scp_logo-for_lightmode.svg"/>
-	* “你们是做什么的？”
-		“我们以<span class="ruby">收容<span class="rt">Secure</span></span>、<span class="ruby">控制<span class="rt">Contain</span></span>、<span class="ruby">保护<span class="rt">Protect</span></span>为宗旨，其对象是被我们称之为收容物/SCP 的……东西。”
-	* {asked} “你们对于世界持有怎样的态度？”
-		“我们所做的被称作‘必要之恶’。”
-	* {asked} “我们有哪些同行组织？”
-		“其实还挺多……我们最大的同行组织是<span class="ruby">全球超自然联盟（GOC）<span class="rt">Global Occult Coalition</span></span>。”
+		“<span class="ruby">特殊收容措施基金会<span class="rt">Special Containment Procedures Foundation</span></span>，通常简称SCP基金会。”
+		<img class="limited" src="https:\/\/scp-wiki.wdfiles.com/local--files/about-the-scp-foundation/scp-logo-signature.png"/>
+	* {asked} “你们是做什么的？”
+		“我们的目标是收容异常物品，个体及现象。它们通过物理、心理等危害对全球安全造成显著威胁。”
+		“我们维持常态，从地外、异次元和外层空间的影响中维持人类的独立自主。”
+		“我们的任务是<span class="ruby">控制<span class="rt">Secure</span></span>（控制异常以防止它们落入平民或敌对组织手中）、<span class="ruby">收容<span class="rt">Contain</span></span>（收容异常以防止它们的影响或效应散播）、<span class="ruby">保护<span class="rt">Protect</span></span>（保护人类免受异常的影响并保护异常本身直至它们被完全理解）。”
+		“我们维护着一个关于异常所需，通常称呼为“SCP”的特殊收容措施的信息的数据库，将异常分类并收容。”
+	* {asked} “有没有其它知晓异常的组织？”
+		“有，而且还挺多。一些组织拥有相似的目的并可能与我们合作，但更多组织为投机主义者。与其它组织合作需经领导层明确同意。”
+		“近年来一个最大的同行组织是<span class="ruby">全球超自然联盟（GOC）<span class="rt">Global Occult Coalition</span></span>。”
 		<img class="limited" src="https:\/\/scp-wiki.wdfiles.com/local--files/goc-hub-page/GOC-Logo-v4.png"/>
-		“他们由 GOC 部门与 108 议会构成，游离在纯粹自由组织与个体政治组织之间；强项在于奇术。而我们比他们更加「超自然」。”
-		“其它还有蛇之手、欲肉教、破碎之神教会、地平线倡议、混沌分裂者等等。”
 	* “如果测试未通过会怎么样？”
 		“我们会处理好你的记忆。”
 	* “没问题了。”

@@ -1,9 +1,13 @@
 {
+	"dr-il-bu-sh": {
+		"title": "梦幻泡影",
+		"description": "集齐正常结局梦、幻、泡、影。"
+	},
 	"examine_permission": {
-		"text": "检查许可"
+		"title": "检查许可"
 	},
 	"regex_master": {
-		"text": "正则表达式大师",
+		"title": "正则表达式大师",
 		"secret": true
 	}
 }

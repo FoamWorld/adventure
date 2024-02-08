@@ -14,7 +14,7 @@ function display_awards() {
     let ul = document.createElement("ul")
     for (let key in awards) {
         let li = document.createElement("li")
-        li.innerText = dataset["awards"][key].text
+        li.innerText = dataset["awards"][key].title
         ul.append(li)
     }
     return ul

@@ -7,12 +7,26 @@
 
 
 
+== frag_escape_without_memory ==
+#CLEAR
+#RANDOM: uniform_int_distribution 1 15
+{t_random == 1:
+    有一天你突然发现，自己得到了一些碎片的记忆。
+    * [置之不理]
+    * [求助]
+        可是，找谁呢？
+}
+-> u_end_dream
+
+
+
 == frag_road_of_Apex_Tier_Pluripotent_Entity ==
 = level_base
 你意识到自己要么不全知全能要么不善，并且在创造自己搬不起来的石头上一筹莫展。
 你控制不了过去，似乎也接触不到命运。
 这一路上有太多的悲剧。
 * 不足惜。
+* 了却因果。
 * ……
 -
 * [这没有意义]。 -> u_end_suiside
