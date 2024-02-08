@@ -278,9 +278,15 @@ img.limited {
     display: none;
 }
 
-.copyable {
+.copyable-text {
     color: goldenrod;
-    cursor: copy;
+}
+
+.copy-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: "Font Awesome 6 Free";
 }
 
 .distort {

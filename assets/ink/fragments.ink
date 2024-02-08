@@ -13,8 +13,10 @@
 {t_random == 1:
     有一天你突然发现，自己得到了一些碎片的记忆。
     * [置之不理]
+        -> u_end_dream
     * [求助]
         可是，找谁呢？
+        -> u_end_dream
 }
 -> u_end_dream
 

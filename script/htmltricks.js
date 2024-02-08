@@ -6,13 +6,24 @@ function createQElement(tagname, deco = {}) {
 }
 
 function copyable(text) {
-	let span = createQElement("span", { innerText: text, className: "copyable" })
-	span.addEventListener("click", function (_) {
-		navigator.clipboard.writeText(text).then(() => undefined, function () {
+	let div = document.createElement("span")
+	let span = createQElement("span", { innerText: text, className: "copyable-text" })
+	let button = document.createElement("button")
+	button.classList.add("fas", "fa-copy", "copy-button")
+	button.addEventListener("click", function (_) {
+		navigator.clipboard.writeText(text).then(() => {
+			button.classList.replace("fa-copy", "fa-check")
+			button.disabled = "disabled"
+			setTimeout(function () {
+				button.classList.replace("fa-check", "fa-copy")
+				button.removeAttribute("disabled")
+			}, 5000)
+		}, function () {
 			window.alert("复制失败")
 		})
 	})
-	return span
+	div.append(span, button)
+	return div
 }
 
 function inkChoice(text, f) {
@@ -52,9 +63,9 @@ function putNotification(content, extraF = undefined) {
 }
 
 function removeAll(selector) {
-    var allElements = storyContainer.querySelectorAll(selector)
-    for (var i = 0; i < allElements.length; i++) {
-        var el = allElements[i]
-        el.parentNode.removeChild(el)
-    }
+	var allElements = storyContainer.querySelectorAll(selector)
+	for (var i = 0; i < allElements.length; i++) {
+		var el = allElements[i]
+		el.parentNode.removeChild(el)
+	}
 }
