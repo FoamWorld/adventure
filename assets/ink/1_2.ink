@@ -41,13 +41,13 @@ Dgeros：“欢迎来到……呃……你先把这个戴上。”
 “在测试开始前，你想问些什么？我大体介绍一下，细节以后再说。”
 - (opts)
 	* (asked) “你们这个组织叫什么？”
-		“<span class="ruby">特殊收容措施基金会<span class="rt">Special Containment Procedures Foundation</span></span>，通常简称SCP基金会。”
+		“<span class="ruby">特殊收容措施基金会<span class="rt">Special Containment Procedures Foundation</span></span>。通常简称为‘SCP基金会’。”
 		<img class="limited" src="https:\/\/scp-wiki.wdfiles.com/local--files/about-the-scp-foundation/scp-logo-signature.png"/>
 	* {asked} “你们是做什么的？”
 		“我们的目标是收容异常物品，个体及现象。它们通过物理、心理等危害对全球安全造成显著威胁。”
 		“我们维持常态，从地外、异次元和外层空间的影响中维持人类的独立自主。”
-		“我们的任务是<span class="ruby">控制<span class="rt">Secure</span></span>（控制异常以防止它们落入平民或敌对组织手中）、<span class="ruby">收容<span class="rt">Contain</span></span>（收容异常以防止它们的影响或效应散播）、<span class="ruby">保护<span class="rt">Protect</span></span>（保护人类免受异常的影响并保护异常本身直至它们被完全理解）。”
-		“我们维护着一个关于异常所需，通常称呼为“SCP”的特殊收容措施的信息的数据库，将异常分类并收容。”
+		“我们的任务是<span class="ruby">控制<span class="rt">Secure</span></span>（控制异常以防止它们落入平民或敌对组织手中）、<span class="ruby">收容<span class="rt">Contain</span></span>（收容异常以防止它们的影响或效应散播）和<span class="ruby">保护<span class="rt">Protect</span></span>（保护人类免受异常的影响并保护异常本身直至它们被完全理解）。”
+		“我们维护着一个关于异常所需，通常称呼为“SCPs”的特殊收容措施的信息的数据库，将异常分类并收容。这些异常称为SCP。”
 	* {asked} “有没有其它知晓异常的组织？”
 		“有，而且还挺多。一些组织拥有相似的目的并可能与我们合作，但更多组织为投机主义者。与其它组织合作需经领导层明确同意。”
 		“近年来一个最大的同行组织是<span class="ruby">全球超自然联盟（GOC）<span class="rt">Global Occult Coalition</span></span>。”

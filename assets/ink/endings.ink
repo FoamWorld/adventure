@@ -1,5 +1,5 @@
 == ending ==
-#APPEAR: main-title
+#TITLE: Main
 -> choice
 = choice
 + [重新开始]

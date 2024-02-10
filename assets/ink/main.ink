@@ -1,4 +1,4 @@
-VAR VERSION = "v0.1.3"
+VAR VERSION = "v0.1.4"
 
 INCLUDE 1_1.ink
 INCLUDE 1_2.ink
@@ -19,7 +19,7 @@ VAR t_target_name = ""
 -> menu
 == menu ==
 #CLEAR
-#APPEAR: main-title
+#TITLE: Main
 + [新的开始] -> beginning
 + [章节选择]
 	+ + [1-1 仪式] -> 1_1

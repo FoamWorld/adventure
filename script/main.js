@@ -98,17 +98,6 @@ function continueStory(firstTime) {
                 if (signal == -1) return
                 continue
             }
-            // APPEAR: situation
-            if (tprop == "APPEAR") {
-                if (val == "main-title" && document.getElementsByClassName("byline").length == 0) {
-                    let div = createQElement("div", { className: "header" })
-                    div.append(
-                        createQElement("h1", { innerText: PROJECT_TITLE }),
-                        createQElement("h2", { className: "byline", innerText: PROJECT_BYLINE })
-                    )
-                    storyContainer.prepend(div)
-                }
-            }
             // CLASS: className
             else if (tprop == "CLASS") {
                 customClasses.push(val);

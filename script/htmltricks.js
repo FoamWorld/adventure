@@ -69,3 +69,14 @@ function removeAll(selector) {
 		el.parentNode.removeChild(el)
 	}
 }
+
+tagOptions["TITLE"] = function (val) {
+	if (val == "Main" && document.getElementsByClassName("byline").length == 0) {
+		let div = createQElement("div", { className: "header" })
+		div.append(
+			createQElement("h1", { innerText: PROJECT_TITLE }),
+			createQElement("h2", { className: "byline", innerText: PROJECT_BYLINE })
+		)
+		storyContainer.prepend(div)
+	}
+}
