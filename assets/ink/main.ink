@@ -1,4 +1,4 @@
-VAR VERSION = "v0.1.4"
+VAR VERSION = "v0.1.5"
 
 INCLUDE 1_1.ink
 INCLUDE 1_2.ink
