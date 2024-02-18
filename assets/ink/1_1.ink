@@ -31,7 +31,7 @@
     <i>靠近些……再靠近些……看清那些符号……</i>
     * * [逃跑] -> runaway
     * * [看清那些符号]
-        【符文】禁锢 #CLASS: neon
+        <span class="rune-evil">ᚾ</span>  // 束缚-空间
         -> investigate
 * [逃跑] -> runaway
 * [报警]

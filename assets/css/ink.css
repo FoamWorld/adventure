@@ -330,6 +330,16 @@ img.limited {
     }
 }
 
+@keyframes shining-evil {
+    from {
+        text-shadow: 0 0 black;
+    }
+
+    to {
+        text-shadow: 0 0 5px darkgreen, 0 0 10px darkgreen, 0 0 15px darkgreen, 0 0 20px darkcyan, 0 0 25px darkcyan, 0 0 30px darkcyan;
+    }
+}
+
 .neon {
     -webkit-animation: shining-cyan 0.5s alternate infinite;
     animation: shining-cyan 0.5s alternate infinite;
@@ -361,6 +371,13 @@ img.limited {
     line-height: 1;
     height: 1em;
     vertical-align: text-bottom;
+}
+
+.rune-evil {
+    font-size: 400%;
+    text-align: center;
+    color: darkgreen;
+    animation: shining-evil 2s alternate infinite;
 }
 
 .warning {

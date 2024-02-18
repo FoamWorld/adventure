@@ -1,3 +1,24 @@
+function merge(st, st2) {
+    if (st.award == {})
+        st.award = st2.award
+    else
+        for (let key in st2.award)
+            if (st.award[key] == undefined || st.award[key] < st2.award[key])
+                st.award[key] = st2.award[key]
+    if (st.end == {})
+        st.end = st2.end
+    else
+        for (let key in st2.end) {
+            let lo = st2.end[key]
+            if (st.end[key] == undefined)
+                st.end[key] = lo
+            else
+                for (let key2 in low)
+                    if (st.end[key][key2] == undefined || st.end[key][key2] < st2.end[key][key2])
+                        st.end[key][key2] = st2.end[key][key2]
+        }
+}
+
 /*
  + contactVar
  + ink_var("VERSION").value
