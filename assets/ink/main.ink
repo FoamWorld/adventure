@@ -1,4 +1,5 @@
-VAR VERSION = "v0.1.5"
+VAR VERSION = "v0.1.6"
+VAR DEBUG_MODE = false
 
 INCLUDE 1_1.ink
 INCLUDE 1_2.ink
@@ -35,6 +36,7 @@ VAR t_target_name = ""
 		进行中内容：1-2
 		+ + + [返回] -> menu
 	+ + [许可信息] -> permission
++ {DEBUG_MODE} [调试区间] -> debug
 
 == beginning ==
 #CLEAR
@@ -105,4 +107,10 @@ VAR t_target_name = ""
 #CLEAR
 <ul><li><a href="https:\/\/github.com/foamworld/adventure?tab=readme-ov-file">README: 许可说明</a></li><li><a href="source_list.html">素材列表</a></li></ul>
 #AWARD: give examine_permission
++ [返回] -> menu
+
+== debug ==
+{~ t_random = 0}
+.#RANDOM: uniform_int_distribution 0 255
+随机：{t_random}
 + [返回] -> menu

@@ -68,14 +68,17 @@ function continueStory(firstTime) {
                 let value = undefined
                 let args = val.split(' ')
                 let type = args.shift(1)
+                let l = Number(args[0])
+                let r = Number(args[1])
                 if (mode == "normal") {
                     if (type == "uniform_int_distribution") {
-                        value = Math.floor(Math.random() * (args[1] - args[0] + 1)) + args[0]
+
+                        value = Math.floor(Math.random() * (r - l + 1)) + l
                         ink_var("t_random").value = value
                     }
                 }
                 else if (mode == "editable") {
-                    ink_var("t_random").value = Number(window.prompt(val, args[0]))
+                    ink_var("t_random").value = Number(window.prompt(val, l))
                 }
                 if (contactVar["processShiny"]) {
                     appendList.push(noticeable(`%RANDOM: ${value}%`))

@@ -303,7 +303,7 @@ img.limited {
 
 .holy {
     color: goldenrod;
-    text-shadow: 0 0 10px gold;
+    text-shadow: 1px 0 10px gold;
 }
 
 .input {
@@ -336,7 +336,7 @@ img.limited {
     }
 
     to {
-        text-shadow: 0 0 5px darkgreen, 0 0 10px darkgreen, 0 0 15px darkgreen, 0 0 20px darkcyan, 0 0 25px darkcyan, 0 0 30px darkcyan;
+        text-shadow: 0 0 3px darkgreen, 0 0 6px darkgreen, 0 0 9px darkgreen, 0 0 12px darkcyan, 0 0 15px darkcyan, 0 0 18px darkcyan;
     }
 }
 
