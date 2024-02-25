@@ -72,10 +72,12 @@ function continueStory(firstTime) {
                 let r = Number(args[1])
                 if (mode == "normal") {
                     if (type == "uniform_int_distribution") {
-
                         value = Math.floor(Math.random() * (r - l + 1)) + l
-                        ink_var("t_random").value = value
                     }
+                    else if (type == "uuid") {
+                        value = crypto.randomUUID()
+                    }
+                    ink_var("t_random").value = value
                 }
                 else if (mode == "editable") {
                     ink_var("t_random").value = Number(window.prompt(val, l))
