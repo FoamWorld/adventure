@@ -3,9 +3,14 @@ tagOptions["AWARD"] = function (val) { // option name
     let args = val.split(' ')
     let type = args.shift(1)
     if (type == "give") {
-        statistics["award"][args[0]] = true
+        give_award(args[0])
     }
     else console.error(`AWARD 标签没有命令 ${type}`)
+}
+
+function give_award(name) {
+    statistics["award"][name] = true
+    layer.msg(`🎉获得成就${dataset["awards"][name].title}`)
 }
 
 function display_awards() {

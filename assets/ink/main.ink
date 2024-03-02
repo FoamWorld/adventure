@@ -1,4 +1,4 @@
-VAR VERSION = "v0.1.7"
+VAR VERSION = "v0.1.8"
 VAR DEBUG_MODE = false
 
 INCLUDE 1_1.ink
@@ -6,6 +6,8 @@ INCLUDE 1_2.ink
 INCLUDE 1_3.ink
 INCLUDE fragments.ink
 INCLUDE endings.ink
+
+INCLUDE mods/parawatch_wiki.ink
 
 // 重要变量
 VAR chapter = ""

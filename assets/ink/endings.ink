@@ -72,12 +72,12 @@
 
 == u_end_too_observable ==
 你知道的太多了 #END: unusual
-死人才可以保守秘密……一般情况下 #CLASS: help
+死人才可以保守秘密，至少一般如此。 #CLASS: help
 -> ending
 
 == u_end_why ==
 为什么 #END: unusual
-这是一个通用的结局 #CLASS: help
+这是一个通用的结局。 #CLASS: help
 -> ending
 
 == r_end_experimented ==
@@ -86,5 +86,4 @@
 
 == r_end_god_name ==
 不可妄称神的名 #END: rare
-不要作死。 #CLASS: help
 -> ending

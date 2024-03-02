@@ -1,4 +1,8 @@
 {
+	"dr_king": {
+		"title": "苹果籽之神",
+		"description": "随机出至少20次苹果籽相关事物。"
+	},
 	"dr-il-bu-sh": {
 		"title": "梦幻泡影",
 		"description": "集齐正常结局梦、幻、泡、影。"
@@ -9,6 +13,9 @@
 	"goc_success": {
 		"title": "罕见的成功",
 		"description": "GOC的拨奏曲程序成功运行。"
+	},
+	"im_toaster": {
+		"title": "我是一个烤面包机"
 	},
 	"regex_master": {
 		"title": "正则表达式大师",
