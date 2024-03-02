@@ -6,6 +6,10 @@
 	"examine_permission": {
 		"title": "检查许可"
 	},
+	"goc_success": {
+		"title": "罕见的成功",
+		"description": "GOC的拨奏曲程序成功运行。"
+	},
 	"regex_master": {
 		"title": "正则表达式大师",
 		"secret": true

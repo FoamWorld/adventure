@@ -48,7 +48,7 @@ function removeAll(selector) {
 	}
 }
 
-tagOptions["TITLE"] = function (val) {
+tagOptions["TITLE"] = function (val, variables) {
 	if (val == "Main" && document.getElementsByClassName("byline").length == 0) {
 		let div = createQElement("div", { className: "header" })
 		div.append(
@@ -56,5 +56,10 @@ tagOptions["TITLE"] = function (val) {
 			createQElement("h2", { className: "byline", innerText: PROJECT_BYLINE })
 		)
 		storyContainer.prepend(div)
+	}
+	else {
+		let div = createQElement("div", { className: "help" })
+		div.appendChild(createQElement("p", { innerText: val }))
+		variables.appendList.push(div)
 	}
 }

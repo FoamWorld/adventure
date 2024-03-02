@@ -1,8 +1,9 @@
-VAR VERSION = "v0.1.6"
+VAR VERSION = "v0.1.7"
 VAR DEBUG_MODE = false
 
 INCLUDE 1_1.ink
 INCLUDE 1_2.ink
+INCLUDE 1_3.ink
 INCLUDE fragments.ink
 INCLUDE endings.ink
 
@@ -47,7 +48,7 @@ VAR t_target_name = ""
 + [确定] -> jump
 
 = jump
-第壹章 秩序：秩序的天平倒向秩序 #CLASS: help
+#TITLE: 第一章 秩序：秩序的天平倒向秩序
 + [故事就此开始……] -> 1_1
 + [不是，你先等等] -> menu
 
@@ -73,6 +74,7 @@ VAR t_target_name = ""
 	+ + [瞬间]
 		#SET: optionSpeed "instant"
 + [调节重要游戏节点显示]
+	重要游戏节点包括存档点和随机分支。
 	+ + [不显示]
 		#SET: processShiny false
 	+ + [显示]
