@@ -2,14 +2,19 @@ const PROJECT_NAME = "adventure";
 const PROJECT_TITLE = "Adventure";
 const PROJECT_BYLINE = "by Rratic";
 
-layui.use(["layer"], function () {
-    if (document.readyState != "complete") {
-        var layerLoadingId = layer.load(2);
-        document.onreadystatechange = function () {
-            layer.close(layerLoadingId);
+if (window.layui != undefined) {
+    layui.use(["layer"], function () {
+        if (document.readyState != "complete") {
+            var layerLoadingId = layer.load(2);
+            document.onreadystatechange = function () {
+                layer.close(layerLoadingId);
+            }
         }
-    }
-})
+    })
+}
+else {
+    putNotification("layui.js 加载失败")
+}
 
 var dataset = {};
 function fetch_data(key) {

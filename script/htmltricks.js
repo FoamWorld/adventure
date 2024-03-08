@@ -34,6 +34,12 @@ function inkChoice(text, f) {
 	return choice
 }
 
+function message_centercover(html) {
+	if (window.layer != undefined) {
+		layer.msg(html)
+	}
+}
+
 function noticeable(text) {
 	let noti = createQElement("p", { className: "neon", innerText: text })
 	noti.style.textAlign = "center"
