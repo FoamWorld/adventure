@@ -1,5 +1,5 @@
 const PROJECT_NAME = "adventure";
-const PROJECT_TITLE = "Adventure";
+const PROJECT_TITLE = "Mercury & Milfoil";
 const PROJECT_BYLINE = "by Rratic";
 
 if (window.layui != undefined) {

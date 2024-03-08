@@ -1,4 +1,4 @@
-VAR VERSION = "v0.1.8"
+VAR VERSION = "v0.1.9"
 VAR DEBUG_MODE = false
 
 INCLUDE 1_1.ink
@@ -26,8 +26,9 @@ VAR t_target_name = ""
 #TITLE: Main
 + [新的开始] -> beginning
 + [章节选择]
-	+ + [1-1 仪式] -> 1_1
-    + + [1-2 招魂] -> 1_2
+	+ + [1-1] -> 1_1
+    + + [1-2] -> 1_2
+	+ + [1-3] -> 1_3
 	+ + [返回] -> menu
 + [游戏设置] -> setting
 + [统计数据] -> statistics
@@ -35,8 +36,8 @@ VAR t_target_name = ""
 	+ + [关于]
 		项目仓库：<a href="https:\/\/github.com/foamworld/adventure">Github: FoamWorld/Adventure</a>
 		当前版本：{VERSION}
-		已完成内容：menu, 1-1
-		进行中内容：1-2
+		已完成内容：menu, 1-1, 1-2
+		进行中内容：1-3
 		+ + + [返回] -> menu
 	+ + [许可信息] -> permission
 + {DEBUG_MODE} [调试区间] -> debug

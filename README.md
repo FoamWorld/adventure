@@ -1,6 +1,7 @@
-# Adventure
+# Mercury & Milfoil
 ## 关于
-一个基于 Ink 的（扩展）交互式小说
+一个交互式小说和它基于 Ink 的轻风格引擎（扩展）。
+* [相关帖](https://scp-wiki-cn.wikidot.com/forum/t-16705305/)
 
 ## 许可说明
 `script` 下代码除 `script/story.js` 外使用 MIT 许可证，其中仅 `script/main.js` 参考了，`script/ink.js` 沿用了 [inkle](https://github.com/inkle) 提供的标准代码。
@@ -41,3 +42,10 @@
 	- [ ] 快捷键
 	- [ ] 拖动效果
 - [ ] 地图
+
+## 更新说明
+**v0.1.9**
+* 修改标题为“Mercury & Milfoil”
+* 修复 layui 加载失败的后续问题
+
+**v0.1.0**
