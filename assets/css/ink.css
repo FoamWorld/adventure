@@ -270,6 +270,11 @@ h4 {
     font-family: "Quattrocento", Georgia, 'Times New Roman', Times, serif;
 }
 
+iframe {
+    width: -webkit-fill-available;
+    height: 300px;
+}
+
 img.limited {
     width: 60%;
 }

@@ -54,6 +54,12 @@ function removeAll(selector) {
 	}
 }
 
+tagOptions["IFRAME"] = function(val, variables) {
+	let ifr = document.createElement("iframe")
+	ifr.src = `./assets/data/${val}.html`
+	variables.appendList.push(ifr)
+}
+
 tagOptions["TITLE"] = function (val, variables) {
 	if (val == "Main" && document.getElementsByClassName("byline").length == 0) {
 		let div = createQElement("div", { className: "header" })

@@ -42,7 +42,7 @@ Dgeros：“是你经历了CN-2019-B3141-817？欢迎来到……呃……你先
 - (opts)
 	* (asked) “你们这个组织叫什么？”
 		“<span class="ruby">特殊收容措施基金会<span class="rt">Special Containment Procedures Foundation</span></span>。通常简称为‘SCP基金会’。”
-		<img class="limited" src="https:\/\/scp-wiki.wdfiles.com/local--files/about-the-scp-foundation/scp-logo-signature.png"/>
+		<img class="limited" src="https:\/\/scpsandboxcn.wdfiles.com/local--files/oxygen9-files/SCPF_1_Dark.svg"/>
 	* {asked} “你们是做什么的？”
 		“我们的目标是收容异常物品，个体及现象。它们通过物理、心理等危害对全球安全造成显著威胁。”
 		“我们维持常态，从地外、异次元和外层空间的影响中维持人类的独立自主。”
@@ -108,8 +108,9 @@ Dgeros：“是你经历了CN-2019-B3141-817？欢迎来到……呃……你先
 = test2
 .#CHECKPOINT: set
 “第二项测试需要你进行实践。我已经给你分配了一个临时人员（也就是E级）编号，这是你的PDA，即个人数据终端，它包含了现在所有主要的专业工具、智能设备、传输协议的功能。”
-“\#17槽里给你装载了可以联通观谬维基的APP，这是一个网络论坛，由阴谋论者、超常爱好者和业余写手组成，其活动目的是调查和揭露异常现象。该团体的活动主要为在其论坛上汇编故事，讲述遭遇超常现象、历史案例以及用户自己遭遇过的非常事件。其管理组建立起了一定程度的协调合作，但因其用户群极度松散无法进一步深化。管理人员尚不知晓大型超自然组织存在的，而且我们有一点的监视。”
+“\#17槽里给你装载了可以联通观谬维基的APP，这是一个网络论坛，由阴谋论者、超常爱好者和业余写手组成，其活动目的是调查和揭露异常现象。该团体的活动主要为在其论坛上汇编故事，讲述遭遇超常现象、历史案例以及用户自己遭遇过的非常事件。其管理组建立起了一定程度的协调合作，但因其用户群极度松散无法进一步深化。管理人员是不知晓大型超自然组织存在的，而且我们有一定的监视。”
 <img class="limited" src="https:\/\/scp-wiki.wdfiles.com/local--files/theme:creepypasta/rook.png"/>
+* [打开APP]
 -> load_parawatch_wiki() -> done
 
 = caught_pataphysics
