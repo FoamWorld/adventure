@@ -135,9 +135,9 @@ function continueStory(firstTime) {
         })
     });
 
-    if (!firstTime)
+    if (!firstTime && contactVar["textScroll"]) {
         scrollDown(previousBottomEdge);
-
+    }
 }
 
 function restart() {

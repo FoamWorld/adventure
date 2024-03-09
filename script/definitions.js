@@ -41,6 +41,7 @@ var statistics = {
 }
 
 var contactVar = {
+    optionScroll: true,
     optionSpeed: 200.0,
     player: {},
     processShiny: false,

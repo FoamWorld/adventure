@@ -63,6 +63,7 @@ VAR t_target_name = ""
 + [命名]
 	-> set_name() ->
 + [调节文本出现速度]
+	“普通”速度是 0.2s 每段落。
 	+ + [慢]
 		#SET: textSpeed 400.0
 	+ + [普通]
@@ -71,7 +72,13 @@ VAR t_target_name = ""
 		#SET: textSpeed 100.0
 	+ + [瞬间]
 		#SET: textSpeed "instant"
++ [调节文本出现形态]
+	+ + [强制下滑]
+		#SET: textScroll true
+	+ + [滞留]
+		#SET: textScroll false
 + [调节选项出现速度]
+	当选项数目大于 8 时总是瞬间出现。
 	+ + [普通]
 		#SET: optionSpeed 200.0
 	+ + [瞬间]

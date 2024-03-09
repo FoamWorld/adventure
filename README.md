@@ -6,7 +6,7 @@
 ## 许可说明
 `script` 下代码除 `script/story.js` 外使用 MIT 许可证，其中仅 `script/main.js` 参考了，`script/ink.js` 沿用了 [inkle](https://github.com/inkle) 提供的标准代码。
 
-`assets/cards`，`assets/data` 下文件使用 MIT 许可证。
+`assets/cards`，`assets/data` 下文件使用 MIT 许可证，主要来自 [iconhunt](https://iconhunt.site/) 搜索引擎提供的开源矢量图标。
 
 `assets/css/ink.css` 参考了 [inkle](https://github.com/inkle) 提供的标准代码。
 
@@ -47,5 +47,7 @@
 **v0.1.9**
 * 修改标题为“Mercury & Milfoil”
 * 修复 layui 加载失败的后续问题
+* 添加设置
 
 **v0.1.0**
+* 确定大致形式
