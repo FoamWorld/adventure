@@ -36,7 +36,7 @@ function inkChoice(text, f) {
 
 function message_centercover(html) {
 	if (window.layer != undefined) {
-		layer.msg(html)
+		layer.msg(html, {skin: "message"})
 	}
 }
 
@@ -54,7 +54,7 @@ function removeAll(selector) {
 	}
 }
 
-tagOptions["IFRAME"] = function(val, variables) {
+tagOptions["IFRAME"] = function (val, variables) {
 	let ifr = document.createElement("iframe")
 	ifr.src = `./assets/data/${val}.html`
 	variables.appendList.push(ifr)

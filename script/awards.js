@@ -10,7 +10,7 @@ tagOptions["AWARD"] = function (val) { // option name
 
 function give_award(name) {
     statistics["award"][name] = true
-    message_centercover(`🎉获得成就${dataset["awards"][name].title}`)
+    message_centercover(`🎉获得成就${dataset["awards"][name].title}！`)
 }
 
 function display_awards() {

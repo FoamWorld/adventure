@@ -325,6 +325,12 @@ img.limited {
     border: 1px dashed #999;
 }
 
+.message {
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #6fd080;
+}
+
 @keyframes shining-cyan {
     from {
         text-shadow: 0 0 10px lightblue, 0 0 20px lightblue, 0 0 30px lightblue, 0 0 40px skyblue, 0 0 50px skyblue, 0 0 60px skyblue;
