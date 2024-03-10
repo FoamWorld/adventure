@@ -17,13 +17,15 @@ else {
 }
 
 var dataset = {};
-function fetch_data(key) {
-    fetch(`assets/data/${key}.json`)
+function fetch_data(key, path) {
+    fetch(path)
         .then(response => {
             if (!response.ok) {
                 let msg = `HTTP Error ${response.status} (${response.statusText})`
-                console.error(msg)
-                putNotification(msg, function () { fetch_data(key) })
+                putNotification(msg, {
+                    "重新抓取": function () { fetch_data(key, path) },
+                    "忽略": null
+                })
                 return null
             }
             return response.json()
@@ -76,38 +78,40 @@ class StoryNotification {
         }
         else {
             let obj = this.stack.shift(1)
-            this.put(obj.content, obj.extraF)
+            this.put(obj.content, obj.methods)
         }
     }
-    add(content, extraF = undefined) {
+    add(content, methods) {
+        if (methods == undefined) methods = { "忽略": null }
         if (this.stack.length == 0) {
             let div = document.createElement("div")
             div.className = "container"
             this.container = div
 
-            this.put(content, extraF)
+            this.put(content, methods)
             storyContainer.parentNode.insertBefore(div, storyContainer)
             storyContainer.classList.add("box-hide")
         }
-        else
-            this.stack.push({ content: content, extraF: extraF })
+        else {
+            this.stack.push({ content: content, methods: methods })
+        }
     }
-    put(content, extraF) {
+    put(content, methods) {
         let div = this.container
         div.appendChild(createQElement("p", { className: "warning", innerHTML: content }))
         let that = this
-        if (extraF != undefined) {
-            div.appendChild(inkChoice("处理", function (event) {
+        for (let key in Object.keys(methods)) {
+            let value = methods[key]
+            div.appendChild(inkChoice(key, function (event) {
                 that.remove()
-                extraF(event)
+                if (value != null) {
+                    value(event)
+                }
             }))
         }
-        div.appendChild(inkChoice("忽略", function (_) {
-            that.remove()
-        }))
     }
 }
 var storyNotification = new StoryNotification();
-function putNotification(content, extraF = undefined) {
-    storyNotification.add(content, extraF)
+function putNotification(content, methods) {
+    storyNotification.add(content, methods)
 }

@@ -1,4 +1,4 @@
-fetch_data("awards");
+fetch_data("awards", "./assets/data/awards.json");
 tagOptions["AWARD"] = function (val) { // option name
     let args = val.split(' ')
     let type = args.shift(1)

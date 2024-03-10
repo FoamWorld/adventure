@@ -19,11 +19,13 @@ tagOptions["SCRIPT"] = function (val) {
 	let f = extraScripts[name]
 	if (f == undefined) {
 		let msg = `扩展 ${name} 未引入`
-		console.error(msg)
-		putNotification(msg, function (_) {
-			try {
-				extraScripts.include(`script/extra/${name}.js`)
-			} catch (e) { putNotification(e) }
+		putNotification(msg, {
+			"导入": function (_) {
+				try {
+					extraScripts.include(`script/extra/${name}.js`)
+				} catch (e) { putNotification(e) }
+			},
+			"忽略": null
 		})
 	}
 	else

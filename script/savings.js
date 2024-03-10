@@ -51,7 +51,7 @@ function backCheckPoint() {
         unpackSavePoint(checkPoint)
     }
     catch (e) {
-        console.debug("无法打开保存的状态")
+        putNotification("无法打开保存的状态", { "确定": null })
     }
     continueStory(true)
     outerScrollContainer.scrollTo(0, 0)
@@ -83,9 +83,20 @@ function loadSavePoint() {
         let savedVersion = localStorage.getItem(`${PROJECT_NAME}-version`)
         if (savedVersion == undefined) return false
         let currentVersion = ink_var("VERSION").value
+        let resolveStatus = false
         if (savedVersion != currentVersion) {
-            let conf = window.confirm(`存档版本 ${savedVersion} 与当前版本 ${currentVersion} 不匹配，是否尝试加载？`)
-            if (!conf) throw ("加载被拒绝")
+            putNotification(`存档版本 ${savedVersion} 与当前版本 ${currentVersion} 不匹配`, {
+                "强制加载": null,
+                "强制加载与更新": function () {
+                    resolveStatus = true
+                },
+                "取消加载": function () {
+                    throw ("加载被拒绝")
+                }
+            })
+        }
+        if (resolveStatus) {
+            localStorage.setItem(`${PROJECT_NAME}-version`, currentVersion)
         }
         let savedState = localStorage.getItem(`${PROJECT_NAME}-save-state`)
         if (savedState) story.state.LoadJson(savedState)
@@ -94,19 +105,13 @@ function loadSavePoint() {
         return true
     }
     catch (e) {
-        console.debug("无法打开保存的状态")
+        putNotification("无法打开保存的状态", { "确定": null })
     }
     return false
 }
 
 function setupTheme(globalTagTheme) {
-    var savedTheme
-    try {
-        savedTheme = localStorage.getItem('ink-theme')
-    }
-    catch (e) {
-        console.debug("无法打开保存的状态")
-    }
+    var savedTheme = localStorage.getItem('ink-theme')
 
     var browserDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
@@ -134,9 +139,7 @@ function setupButtons(hasSave) {
             saveExtra()
         }
         catch (e) {
-            console.error(e)
             putNotification(e)
-            console.warn("无法保存状态")
         }
     })
 
