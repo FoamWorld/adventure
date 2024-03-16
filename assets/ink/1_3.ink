@@ -12,37 +12,56 @@
 ~ temp info_collect = ()
 ~ temp companion_state = "home"
 ~ temp keyholder_state = "home"
--> hall
 
-= hall
-* [前往楼梯间] -> stairway
-* [前往电梯间] -> elevway
+再次检查了观谬维基私信中对方的住址：1201，你步入了一层的大厅。
 
-= elevway
-* [进入电梯] -> elevator
-* [回到走廊] -> hall
+这里的灯不知为何不够明亮，而且没有窗，大厅里显得很昏黄，不过大的部件还是看得清楚的。
 
-= stairway
-* [上楼]
-	-> stairway
-* [下楼]
-	-> stairway
-* [回到走廊] -> hall
+- (hall)
+    {current_level > 0:
+        {current_level}F 大厅。
+    }
+    {current_level > 1:
+    	楼道里有三扇门。
+    }
+    * [前往楼梯间] -> stairway
+    * [前往电梯间] -> elevway
+    * {current_level > 1} [进入1室]
+    	{current_level == 12:
+    		;
+    	}
+    -> hall
 
-= elevator
-* {elev_closed} [开门]
-	~ elev_closed = false
-* {!elev_closed} [关门]
-	~ elev_closed = true
-* {!elev_closed} [走出电梯]
-	-> elevway
+- (elevway)
+    * [进入电梯] -> elevator
+    * [回到走廊] -> hall
 
-= fail_magic
-“太上台星 应变无停
-驱邪缚魅 保命护身
-智慧明净 心神安宁
-三魂永久 魄无丧倾”
-随着这坚定的声音……什么也没发生。
+- (stairway)
+    楼梯间，可以上下楼。
+    {current_level == 1 and door_locked:
+    	另外还有一道门，但是被锁住了。
+    }
+    * {elev_level != 20} [上楼]
+    	-> stairway
+    * [下楼]
+    	-> stairway
+    * [回到走廊] -> hall
+
+- (elevator)
+    * {elev_closed} [开门]
+    	~ elev_closed = false
+    * {!elev_closed} [关门]
+    	~ elev_closed = true
+    * {!elev_closed} [走出电梯]
+    - -> elevway
+
+- (fail_magic)
+    “太上台星 应变无停
+    驱邪缚魅 保命护身
+    智慧明净 心神安宁
+    三魂永久 魄无丧倾”
+    随着这坚定的声音……什么也没发生。
+    -> u_end_fail
 
 = done
 -> to_be_continued

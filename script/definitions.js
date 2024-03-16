@@ -100,7 +100,7 @@ class StoryNotification {
         let div = this.container
         div.appendChild(createQElement("p", { className: "warning", innerHTML: content }))
         let that = this
-        for (let key in Object.keys(methods)) {
+        for (let key of Object.keys(methods)) {
             let value = methods[key]
             div.appendChild(inkChoice(key, function (event) {
                 that.remove()
