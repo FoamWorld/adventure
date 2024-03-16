@@ -5,6 +5,8 @@ tagOptions["AWARD"] = function (val) { // option name
     if (type == "give") {
         give_award(args[0])
     }
+    else if (type == "check") {
+    }
     else console.error(`AWARD 标签没有命令 ${type}`)
 }
 

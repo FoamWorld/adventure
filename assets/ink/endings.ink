@@ -14,7 +14,7 @@
 	+ + [取消] -> choice
 
 == to_be_continued ==
-未完待续
+未完待续 #CLASS: help
 -> ending
 
 == c_end_escape ==
