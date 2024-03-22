@@ -406,17 +406,17 @@ img.limited {
 
 .common-end::before {
     color: green;
-    content: "Common END ";
+    content: "普通结局 ";
 }
 
 .unusual-end::before {
-    color: yellow;
-    content: "Unusual END ";
+    color: darkgoldenrod;
+    content: "正常结局 ";
 }
 
 .rare-end::before {
     color: blue;
-    content: "Rare END ";
+    content: "稀有结局 ";
 }
 
 .dark .copyable {

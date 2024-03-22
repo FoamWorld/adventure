@@ -98,7 +98,7 @@
 
 = ritual
 忽然，稠密至极的阴绿色火焰从符文中喷涌出来。
--> c_end_time_limit_exceeded
+-> u_end_time_limit_exceeded
 
 = action
 你试着打下那些闪光的符文……

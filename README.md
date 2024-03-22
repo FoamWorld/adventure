@@ -3,6 +3,9 @@
 一个交互式小说和它基于 Ink 的轻风格引擎（扩展）。
 * [相关帖](https://scp-wiki-cn.wikidot.com/forum/t-16705305/)
 
+## 注意事项
+* 在微信中打开网页可能导致 `iframe` 中内容无法显示
+
 ## 许可说明
 `script` 下代码除 `script/story.js` 外使用 MIT 许可证，其中仅 `script/main.js` 参考了，`script/ink.js` 沿用了 [inkle](https://github.com/inkle) 提供的标准代码。
 
@@ -40,6 +43,9 @@
 	- [ ] 地图
 
 ## 更新说明
+**v0.1.10**
+* 修改结局显示、TLE 结局的标度
+
 **v0.1.9**
 * 修改标题为“Mercury & Milfoil”
 * 完成 1-3 剧情框架
@@ -48,3 +54,6 @@
 
 **v0.1.0**
 * 确定大致形式
+
+## 鸣谢
+感谢 @真的张茗之 测试 `v0.1.9`

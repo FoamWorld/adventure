@@ -26,10 +26,6 @@
 半途而废 #END: common
 -> ending
 
-== c_end_time_limit_exceeded ==
-来不及了 #END: common
--> ending
-
 == c_end_too_late ==
 太晚了 #END: common
 -> ending
@@ -68,6 +64,10 @@
 
 == u_end_suiside ==
 自杀 #END: unusual
+-> ending
+
+== u_end_time_limit_exceeded ==
+来不及了 #END: unusual
 -> ending
 
 == u_end_too_observable ==
