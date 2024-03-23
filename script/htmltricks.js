@@ -36,7 +36,7 @@ function inkChoice(text, f) {
 
 function message_centercover(html) {
 	if (window.layer != undefined) {
-		layer.msg(html, {skin: "message"})
+		layer.msg(html, { skin: "message" })
 	}
 }
 
@@ -61,7 +61,8 @@ tagOptions["IFRAME"] = function (val, variables) {
 }
 
 tagOptions["TITLE"] = function (val, variables) {
-	if (val == "Main" && document.getElementsByClassName("byline").length == 0) {
+	if (val == "Main") {
+		if (document.getElementsByClassName("byline").length != 0) return
 		let div = createQElement("div", { className: "header" })
 		div.append(
 			createQElement("h1", { innerText: PROJECT_TITLE }),

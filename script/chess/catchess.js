@@ -119,25 +119,29 @@ var catchessRules = {
 					contents[i8 + 7] = { id: 1, ownership: 1 }
 				}
 			},
-			"canvas_display": function (ctx, xw, yw) {
-				ctx.clearRect(0, 0, xw * 8, yw * 8)
+			"canvas_display": function (ctx, wi, o) {
+				ctx.clearRect(0, 0, wi * 8, wi * 8 + 32)
 				ctx.fillStyle = "#C19B6F"
-				ctx.fillRect(0, 0, xw * 8, yw * 8)
+				ctx.fillRect(0, 0, wi * 8, wi * 8 + 32)
 				for (let i = 0; i < 8; i++) {
 					for (let j = 0; j < 8; j++) {
 						let obj = board.contents[i * 8 + j]
 						if (obj.id == 0) continue
-						ctx.drawImage(cat_svg_cache[obj.ownership][obj.id], i * xw, j * yw, xw, yw)
+						ctx.drawImage(cat_svg_cache[obj.ownership][obj.id], i * wi, j * wi + 16, wi, wi)
 					}
 				}
+				ctx.fillStyle = "#F0FCFF"
+				ctx.fillRect(0, o == 0 ? wi * 8 + 16 : 0, wi * 8, 16)
+				ctx.fillStyle = "#7BCFA6"
+				ctx.fillRect(0, o == 0 ? 0 : wi * 8 + 16, wi * 8, 16)
 			},
-			"draw_chosen": function (ctx, pos, xw, yw) {
+			"draw_chosen": function (ctx, pos, wi) {
 				ctx.fillStyle = "#FFFF004F"
-				ctx.fillRect(pos.x * xw, pos.y * yw, xw, yw)
+				ctx.fillRect(pos.x * wi, pos.y * wi + 16, wi, wi)
 			},
-			"draw_target": function (ctx, pos, xw, yw) {
+			"draw_target": function (ctx, pos, wi) {
 				ctx.fillStyle = "#0000FF20"
-				ctx.fillRect(pos.x * xw, pos.y * yw, xw, yw)
+				ctx.fillRect(pos.x * wi, pos.y * wi + 16, wi, wi)
 			},
 		}
 		return board

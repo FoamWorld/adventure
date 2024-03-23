@@ -78,7 +78,7 @@ Dgeros：“是你经历了CN-2019-B3141-817？欢迎来到……呃……你先
 #SCRIPT: include: script/extra/catchess_test.js
 * (asked) “那如果重名会发生什么？”
 	“你猜猜看。”
-* “也就是说它只能杀手名字可以用 Unicode 表示的实体？”
+* “也就是说它只能杀死名字可以用 Unicode 表示的实体？”
 	“……”
 * “……”
 -

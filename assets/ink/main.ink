@@ -1,4 +1,4 @@
-VAR VERSION = "v0.1.9"
+VAR VERSION = "v0.1.10"
 VAR DEBUG_MODE = false
 
 INCLUDE 1_1.ink

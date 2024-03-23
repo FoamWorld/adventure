@@ -72,11 +72,13 @@ class StoryNotification {
         this.stack = []
     }
     remove() {
+        this.stack.shift(1)
         if (this.stack.length == 0) {
             storyContainer.parentNode.removeChild(this.container)
             storyContainer.classList.remove("box-hide")
         }
         else {
+            this.container.replaceChildren()
             let obj = this.stack.shift(1)
             this.put(obj.content, obj.methods)
         }
@@ -92,9 +94,7 @@ class StoryNotification {
             storyContainer.parentNode.insertBefore(div, storyContainer)
             storyContainer.classList.add("box-hide")
         }
-        else {
-            this.stack.push({ content: content, methods: methods })
-        }
+        this.stack.push({ content: content, methods: methods })
     }
     put(content, methods) {
         let div = this.container

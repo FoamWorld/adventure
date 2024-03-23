@@ -9,14 +9,20 @@
 
 == frag_escape_without_memory ==
 #CLEAR
+-> rand
+= rand
 #RANDOM: uniform_int_distribution 1 15
 {t_random == 1:
-    有一天你突然发现，自己得到了一些碎片的记忆。
-    * [置之不理]
-    * [求助]
-        可是，找谁呢？
+    -> get
 }
--> u_end_dream
+-> u_end_why
+
+= get
+有一天你突然发现，自己得到了一些碎片的记忆。
+* [置之不理]
+* [求助]
+    可是，找谁呢？
+- -> u_end_dream
 
 
 
