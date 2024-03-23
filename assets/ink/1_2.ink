@@ -69,13 +69,17 @@ Dgeros：“是你经历了CN-2019-B3141-817？欢迎来到……呃……你先
 .#CHECKPOINT: set
 你进入了一个房间。唯一的光源是天花板上有些昏暗的灯光，房间中央有一张桌子，上面摆放了一个棋盘和几排棋子。
 <hr>
-“我们现在开始第一项测试。这把枪可以塞入普通子弹，在使用时思考你见过的生物的名字，就可以杀死它。”
-“这是一个只能按照规则走棋的棋盘，请用此枪杀死附身在棋子上的恶灵。”
+“我们现在开始第一项测试。”
+“这把枪可以装填普通子弹，通过数据线输入指定实体的名字，然后开枪就可以杀死它。”
+“一只恶灵附身在这里的某个棋子上。这个棋盘只能按照特定的规则走棋，需要你自己探索。”
+“请用此枪杀死恶灵。”
 #SCRIPT: include: script/chess/chess_base.js
 #SCRIPT: include: script/chess/catchess.js
 #SCRIPT: include: script/extra/catchess_test.js
 * (asked) “那如果重名会发生什么？”
 	“你猜猜看。”
+* “也就是说它只能杀手名字可以用 Unicode 表示的实体？”
+	“……”
 * “……”
 -
 #SCRIPT: catchess_test: init
@@ -94,6 +98,9 @@ Dgeros：“是你经历了CN-2019-B3141-817？欢迎来到……呃……你先
 	}
 	“你觉得，有没有一种可能，我的描述其实是严重夸大的。”
 	-> u_end_demonify
+}
+{t_target_name == "Rratic":
+	-> caught_pataphysics
 }
 {t_target_name == t_password:
 	{t_check:
