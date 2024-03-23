@@ -11,7 +11,7 @@ tagOptions["END"] = function (val, variables) {
 }
 
 function display_endings() {
-	const types = { "common": "普通", "unusual": "正常", "rare": "稀有", "epic": "史诗", "legendary": "传奇", "mythic": "神话", "bad": "坏", "good": "好", "true": "真" }
+	const types = { "common": "普通", "unusual": "罕见", "rare": "稀有", "epic": "史诗", "legendary": "传奇", "mythic": "神话", "bad": "坏", "good": "好", "true": "真" }
 	let endings = statistics["end"]
 	let ul = document.createElement("ul")
 	for (let key in types) {

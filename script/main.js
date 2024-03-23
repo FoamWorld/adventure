@@ -47,7 +47,7 @@ function continueStory(firstTime) {
                 input.type = "text"
                 input.className = "input"
                 input.value = ink_var(val).value
-                input.placeholder = "input"
+                input.placeholder = "输入"
                 prependChoices.push(input)
                 choiceAfter.push(function () {
                     ink_var(val).value = input.value

@@ -16,8 +16,9 @@ LIST information_ids = CRITICAL_INFO, HIDDEN_INFO, KEY_INFO, INTRODUCTION_INFO
 ~ temp keyholder_state = "home"
 
 再次检查了观谬维基私信中对方的住址：1201，你步入了一层的大厅。
-
 这里的灯不知为何不够明亮，而且没有窗，大厅里显得很昏黄，不过大的部件还是看得清楚的。
+
+现在的你没有任何特权，还是应该仔细探查一番。
 
 - (hall)
     {current_level > 0:

@@ -411,7 +411,7 @@ img.limited {
 
 .unusual-end::before {
     color: darkgoldenrod;
-    content: "正常结局 ";
+    content: "罕见结局 ";
 }
 
 .rare-end::before {
